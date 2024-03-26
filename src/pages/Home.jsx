@@ -329,7 +329,7 @@ export default function Home() {
         </Container>
        
         <Container >
-          <Image src="./Mango/Home/gujarat Map.jpg" w="100%" alt="" />
+          <Image src="./Mango/Home/store_details.png" w="100%" alt="" />
         </Container>
         <Container maxW={"3xl"} centerContent>
           <Image src="./Mango/Home/mango_key_point.jpg"  />

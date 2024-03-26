@@ -99,6 +99,8 @@ export default function ProductListSection({ title, products, loading, type }) {
         >
           {title}
         </Text> */}
+        </Container>
+        <Container maxW={"container.xl"} centerContent>
         {type === "carousal" && products.length > 4 ? (
           <Slider {...settings}>  
             {loading === true
