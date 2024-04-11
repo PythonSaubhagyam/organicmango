@@ -858,6 +858,7 @@ export default function Navbar() {
                           textDecoration: "none",
                         }}
                         ms={4}
+                        to={link.location}
                       >
                         {link.name}
                       </Link>
