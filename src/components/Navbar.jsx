@@ -693,7 +693,7 @@ export default function Navbar() {
                                       setOpenAccrodion();
                                     } else {
                                       navigate(
-                                        `/shop?page=1&category=${section.id}`
+                                        `/shop?page=1&category=${section.id}&category_name=${encodeURIComponent(section?.name)}`
                                       );
                                       setAccordion(!isOpen);
                                       onClose();
@@ -758,7 +758,7 @@ export default function Navbar() {
                                                       setOpen(Open);
                                                     } else {
                                                       navigate(
-                                                        `/shop?page=1&category=${subcategory.id}`
+                                                        `/shop?page=1&category=${subcategory.id}&category_name=${encodeURIComponent(subcategory?.name)}`
                                                       );
                                                       setAccordion(!isOpen);
                                                       onClose();
@@ -776,7 +776,7 @@ export default function Navbar() {
                                                   <AccordionIcon
                                                     onClick={() =>
                                                       navigate(
-                                                        `/shop?page=1&category=${subcategory.id}`
+                                                        `/shop?page=1&category=${subcategory.id}&category_name=${encodeURIComponent(subcategory?.name)}`
                                                       )
                                                     }
                                                     display={
@@ -809,7 +809,7 @@ export default function Navbar() {
                                                             key={i}
                                                             onClick={() => {
                                                               navigate(
-                                                                `/shop?page=1&category=${children.id}`
+                                                                `/shop?page=1&category=${children.id}&category_name=${encodeURIComponent(children?.name)}`
                                                               );
                                                               onClose();
                                                             }}
@@ -1159,7 +1159,7 @@ export default function Navbar() {
                             key={index}
                             onMouseEnter={() => handleShow1(section.children)}
                             onClick={() =>
-                              navigate(`/shop?category=${section.id}`)
+                              navigate(`/shop?category=${section.id}&category_name=${encodeURIComponent(section?.name)}`)
                             }
                             sx={{
                               "&:hover": {
@@ -1181,7 +1181,7 @@ export default function Navbar() {
                         <MenuItem
                           fontSize={"14"}
                           key={subIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
+                          onClick={() => navigate(`/shop?category=${item.id}&category_name=${encodeURIComponent(item?.name)}`)}
                           onMouseEnter={() => handleShow2(item.children)}
                           sx={{
                             "&:hover": {
@@ -1199,7 +1199,7 @@ export default function Navbar() {
                         <MenuItem
                           fontSize={"14"}
                           key={nestedIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
+                          onClick={() => navigate(`/shop?category=${item.id}&category_name=${encodeURIComponent(item?.name)}`)}
                           sx={{
                             "&:hover": {
                               backgroundColor: "brand.500",

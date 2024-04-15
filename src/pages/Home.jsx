@@ -36,12 +36,6 @@ import { useNavigate, NavLink as RouterLink } from "react-router-dom";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
 
-
-
-
-
-
-
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
@@ -78,22 +72,19 @@ export default function Home() {
     }
   }
 
-
   const new_arrival_gir_gauveda = [
     {
       image1: "./Mango/Home/alphonso Mango.jpg",
       src: "alphonso",
       name: "Alphonso Mango",
-      id:1275,
+      id: 1275,
     },
     // {
     //   image1: "./Mango/Home/kesar mango.jpg",
     //   src: "kesar",
     //   name: "Kesar Mango",
     // },
-    
-
-  ]
+  ];
 
   return (
     <>
@@ -116,113 +107,125 @@ export default function Home() {
         <Carousel
           banners={[
             {
-              image:
-                "./Mango/NewBanner/mango_01.jpg",
+              image: "./Mango/NewBanner/mango_01.jpg",
               alt_text: "sweet1",
-              image_url:"/products/1275"
+              image_url: "/products/1275",
             },
             {
-              image:
-                "./Mango/NewBanner/mango_02.jpg",
+              image: "./Mango/NewBanner/mango_02.jpg",
               alt_text: "sweet2",
-              image_url:"/products/1275"
+              image_url: "/products/1275",
             },
             {
-              image:
-                "./Mango/NewBanner/mango_03.jpg",
+              image: "./Mango/NewBanner/mango_03.jpg",
               alt_text: "sweet2",
-              image_url:"/products/1275"
+              image_url: "/products/1275",
             },
             {
-              image:
-                "./Mango/NewBanner/mango_04.jpg",
+              image: "./Mango/NewBanner/mango_04.jpg",
               alt_text: "sweet2",
-              image_url:"/products/1275"
+              image_url: "/products/1275",
             },
-            
-
           ]}
         />
       </Container>
 
-      <Container maxW={"3xl"} centerContent w="25%" mb={5} mt={10}>
+      <Container maxW={{ md: "3xl", base: "xl" }} centerContent mb={5} mt={10}>
         <Image src="../Mango/Home/natural_mango.png" alt="" />
       </Container>
-      <Container maxW={"container.xl"} mb={8} mt={2} px={0}>
-
+      <Container maxW={"6xl"} mb={8} mt={2} px={0}>
         <Text
           color={"text.300"}
-          textAlign={"center"}
+          textAlign={{ md: "center", base: "justify" }}
           justifyContent={"justify"}
           px={{ base: 15, lg: 20 }}
-
           fontSize={{ base: "sm", lg: "md" }}
         >
-          Luscious, sweet mangos are universally crowned “The king of the fruits” due to their distinctive flavor, fragrance, taste, and health- <br />promoting qualities. They come in varying shapes and sizes but what we can all agree upon is that the flesh is juicy, orange-yellow in <br /> color, and a flavor that blows your senses. Our amazing organic mangoes are sourced from certified organic farms, contributing to <br />their satisfying and rich taste and tartness. They are rich in potassium and magnesium and are a perfect treatment for high blood <br />pressure. Mangoes are nutrient powerhouses, high in B-vitamins, vitamin A, vitamin C, vitamin E, and vitamin K.
+          Luscious, sweet mangos are universally crowned “The king of the
+          fruits” due to their distinctive flavor, fragrance, taste, and health-
+          promoting qualities. They come in varying shapes and sizes but what we
+          can all agree upon is that the flesh is juicy, orange-yellow in color,
+          and a flavor that blows your senses. Our amazing organic mangoes are
+          sourced from certified organic farms, contributing to their satisfying
+          and rich taste and tartness. They are rich in potassium and magnesium
+          and are a perfect treatment for high blood pressure. Mangoes are
+          nutrient powerhouses, high in B-vitamins, vitamin A, vitamin C,
+          vitamin E, and vitamin K.
         </Text>
-
       </Container>
       <Container centerContent>
-        <Button borderRadius={"22px"} border={"1px solid"} _hover={{bgColor:"#DD920A",color:"white"}} variant={"outline"} color={"text.500"} onClick={()=>navigate("/about-us")} > Read More </Button>
+        <Button
+          borderRadius={"22px"}
+          border={"1px solid"}
+          _hover={{ bgColor: "#DD920A", color: "white" }}
+          variant={"outline"}
+          color={"text.500"}
+          onClick={() => navigate("/about-us")}
+        >
+          {" "}
+          Read More{" "}
+        </Button>
       </Container>
-    
-      <Container centerContent mt={12}>
-        <Image
-          src={"./Mango/Home/Mango Webstie.jpg"}
-          w={"50%"}
-          alt=""
 
-        />
+      <Container centerContent mt={12}>
+        <Image src={"./Mango/Home/Mango Webstie.jpg"} w={"50%"} alt="" />
       </Container>
-      <Container maxW={"6xl"}  centerContent>
+      <Container maxW={"6xl"} centerContent>
         <ProductListSection
           // title="New Arrival Gir Gauveda"
           loading={loading}
           products={new_arrival_gir_gauveda}
         />
       </Container>
-      <Container maxW={"container.xl"} px={20} centerContent>
-        <Grid templateColumns={{
-          md: "repeat(3, 1fr)",
-          base: "repeat(1, 1fr)",
-        }}
-        gap={6}
+      <Container maxW={"container.xl"} px={{ md: 20, base: 8 }} centerContent>
+        <Grid
+          templateColumns={{
+            md: "repeat(3, 1fr)",
+            base: "repeat(1, 1fr)",
+          }}
+          gap={6}
         >
           <GridItem colSpan={1}>
-            <Text color={"text.500"} fontSize={"3xl"}>
+            <Text color={"text.500"} fontSize={{ md: "3xl", base: "2xl" }}>
               About Natural Mango
             </Text>
-            <Text color={"text.300"}  textAlign={"justify"} fontSize={"md"}>With Natural farming activities, we promote the supply of genuine natural goods from our network of trustworthy farmers. This helps farmers to find a ready demand for their goods, reducing market uncertainties so that they can concentrate their resources on producing the best quality foods, while customers can find real natural food products at a fair price.</Text>
+            <Text color={"text.300"} textAlign={"justify"} fontSize={"md"}>
+              With Natural farming activities, we promote the supply of genuine
+              natural goods from our network of trustworthy farmers. This helps
+              farmers to find a ready demand for their goods, reducing market
+              uncertainties so that they can concentrate their resources on
+              producing the best quality foods, while customers can find real
+              natural food products at a fair price.
+            </Text>
           </GridItem>
           <GridItem colSpan={2}>
             <Image src="./Mango/Home/mango_website.png" alt="" />
           </GridItem>
         </Grid>
       </Container>
-    
 
       <Container centerContent mt={{ base: 4, md: 8, lg: 12 }}>
-        <Image src="./Mango/Home/natural_mango_cycle.png" alt="" w={"100%"} />
+        <Image
+          src="./Mango/Home/natural_mango_cycle.png"
+          alt=""
+          w={{ md: "100%", base: "70%" }}
+        />
       </Container>
-
 
       <Container maxW={"container.xl"} px={0} mt={{ base: 4, md: 8, lg: 12 }}>
         <Image src="./Mango/Home/benefits.jpg" alt="" />
       </Container>
 
-
       <Container maxW={"container.xl"} px={0} mt={4}>
         <Image src="./Mango/Home/rating_review.png" alt="" />
       </Container>
 
-
-      <Container maxW={"container.xl"}  backgroundColor={"bg.500"} py={2}>
+      <Container maxW={"container.xl"} backgroundColor={"bg.500"} py={2}>
         <SimpleGrid
           columns={[2, 3, null, 4]}
           px={6}
           maxW={"container.xl"}
           my={6}
-         
           color={"text.700"}
           align="center"
           spacingX={{ base: "10vw", md: "30px" }}
@@ -232,37 +235,40 @@ export default function Home() {
             <StatNumber color="text.300" fontSize={{ base: "3xl", md: "4xl" }}>
               11+
             </StatNumber>
-            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>Natural Mango Varieties</StatHelpText>
+            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>
+              Natural Mango Varieties
+            </StatHelpText>
           </Stat>
 
           <Stat>
             <StatNumber color="text.300" fontSize={{ base: "3xl", md: "4xl" }}>
               7108+
             </StatNumber>
-            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }} >Satisfied Clients</StatHelpText>
+            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>
+              Satisfied Clients
+            </StatHelpText>
           </Stat>
-
-
 
           <Stat>
             <StatNumber color="text.300" fontSize={{ base: "3xl", md: "4xl" }}>
               14+
             </StatNumber>
-            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>Stores</StatHelpText>
+            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>
+              Stores
+            </StatHelpText>
           </Stat>
           <Stat>
             <StatNumber color="text.300" fontSize={{ base: "3xl", md: "4xl" }}>
               100+
             </StatNumber>
-            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>City</StatHelpText>
+            <StatHelpText color="gray.600" fontSize={{ base: "md", md: "lg" }}>
+              City
+            </StatHelpText>
           </Stat>
-
-
         </SimpleGrid>
       </Container>
-      <Container maxW={{ base: "100vw", md: "container.xl" }} >
-        
-      <Box
+      <Container maxW={{ base: "100vw", md: "container.xl" }}>
+        <Box
           w="100%"
           backgroundSize="100%"
           backgroundPosition="50% 100%"
@@ -270,18 +276,21 @@ export default function Home() {
         >
           <Heading
             color="brand.500"
-            size="lg"
+            fontSize={{ md: 33, base: 21 }}
             mx="auto"
             align={"center"}
-            mt={3}
-           
+            my={3}
           >
             OUR CERTIFICATIONS & AWARDS
           </Heading>
         </Box>
-        <Text my={5} textAlign={"center"} color="text.300">
-          We are committed to quality and each of our facility is independently
-          certified by an industry-accredited agency.
+        <Text
+          mb={5}
+          textAlign={{ md: "center", base: "justify" }}
+          color="text.300"
+        >
+          We are committed to quality and each of our facilities is
+          independently certified by an industry-accredited agency.
         </Text>
         <Flex
           justifyContent="space-evenly"
@@ -313,28 +322,31 @@ export default function Home() {
           />
         </Flex>
         <Container centerContent>
-          <Text color="brand.600" fontSize={35}>
-          Licenses & Affiliations
-          </Text>
+        <Heading
+            color="brand.500"
+            fontSize={{ md: 33, base: 21 }}
+            mx="auto"
+            align={"center"}
+            my={3}
+          >
+            LICENSES & AFFILIATIONS
+          </Heading>
         </Container>
 
         <Container centerContent>
           <Image
-            src={
-              "./Mango/Home/apeda.jpg"
-            }
+            src={"./Mango/Home/apeda.jpg"}
             alt="ciolook-certificate"
             w={"25%"}
           />
         </Container>
-       
-        <Container >
+
+        <Container mt={3}>
           <Image src="./Mango/Home/store_details.png" w="100%" alt="" />
         </Container>
         <Container maxW={"3xl"} centerContent>
-          <Image src="./Mango/Home/mango_key_point.jpg"  />
+          <Image src="./Mango/Home/mango_key_point.jpg" />
         </Container>
-      
       </Container>
       <Footer />
       {/* </>

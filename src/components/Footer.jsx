@@ -85,10 +85,7 @@ export default function Footer() {
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
             <Stack color="text.300">
-              <Stack
-                ml={{ md: "50%" }}
-                
-              >
+              <Stack ml={{ md: "50%" }}>
                 <ListHeader style={{ color: "text.500" }}>
                   Quick Links
                 </ListHeader>
@@ -131,7 +128,7 @@ export default function Footer() {
                 as={RouterLink}
                 to={"/store-locator"}
               >
-                Store Locate
+                Store Locator
               </Link>
               <Link
                 textDecoration="none"
@@ -161,62 +158,60 @@ export default function Footer() {
                 Contact Us
               </Link> */}
 
-            
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/faq"}
-                    >
-                      FAQ
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/terms-and-conditions"}
-                    >
-                      Terms & Conditions
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/shipping-policy"}
-                    >
-                      Shipping Policy
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/return-and-refund-policy"}
-                    >
-                      Return & Refund Policy
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/inspire-and-support"}
-                    >
-                      Inspire & Support
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/privacy-policy"}
-                    >
-                      Privacy Policy
-                    </Link>
-                 
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/faq"}
+              >
+                FAQ
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/terms-and-conditions"}
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/shipping-policy"}
+              >
+                Shipping Policy
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/return-and-refund-policy"}
+              >
+                Return & Refund Policy
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/inspire-and-support"}
+              >
+                Inspire & Support
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/privacy-policy"}
+              >
+                Privacy Policy
+              </Link>
             </Stack>
             {/* </SimpleGrid> */}
             {/* </Stack> */}
 
             <Stack color="text.300" mt={{ md: 3 }}>
-              <Stack align={{ md: "flex-start", base: "center" }}>
+              <Stack >
                 <ListHeader gap={"3"}>Customer Support</ListHeader>
               </Stack>
               <Link
@@ -251,7 +246,7 @@ export default function Footer() {
                 care@suryanorganic.com
               </Link>
             </Stack>
-            <Stack mt={{ md: 3 }} align={"center"}>
+            <Stack mt={{ md: 3 }}>
               {/* <ListHeader align={"flex-start"}>Talk To Our Vaidya</ListHeader>
               <Link
                 textDecoration="none"
@@ -280,12 +275,13 @@ export default function Footer() {
               {/* </Stack>
 
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
-              <Stack align={{ md: "flex-start", base: "center" }}>
+              <Stack >
                 <ListHeader marginBottom={5}>
                   We Accepts Payments via
                 </ListHeader>
               </Stack>
               <Image
+              ml={"-15px"}
                 src={
                   "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/footer/payment method.png hnghngh.png"
                 }

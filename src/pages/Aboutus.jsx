@@ -13,50 +13,31 @@ const Aboutus = () => {
       <Container maxW={"container.xl"} alignContent={"flex-start"}>
         <BreadCrumbCom second={"About Us"} secondUrl={"/about-us"} />{" "}
       </Container>
-      <Container maxW={"container.xl"} mb={4} px={0} centerContent>
-        <Box
-          w={"100%"}
-          bgImage={"./Mango/About us/tree.jpg"}
-          bgSize="cover"
-          bgPosition="center"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt={"-10px"}
-          py={20}
-          boxShadow={"0px 0px 0px 0px"}
-          height={"550px"}
-          mb={10}
-          filter="brightness(50%)"
-          style={{ backdropFilter: "blur(10px)" }}
-        >
-          <Text
-            pb={2}
-            color={"#fff"}
-            textAlign={"center"}
-            fontSize="5xl"
-            fontWeight="500"
-          >
-            About Us
-          </Text>
+      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+        <Image src="./Mango/About us/tree.jpg"  filter="brightness(50%)" />
 
-          {/* <Text
-            pb={2}
-            color={"brand.100"}
-            textAlign={"center"}
-            textShadow={"1px 1px 2px lightgreen"}
-            fontSize="7xl"
-            fontWeight="black"
-          >
-            About us
-          </Text> */}
-        </Box>
+        <Text
+          pb={2}
+          color={"brand.500"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "5xl", base: "xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+          // Optional: Add background to improve text readability
+        >
+          About Us
+        </Text>
       </Container>
+
       <Container maxW={"container.xl"}>
-        <VStack>
-          <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} mt={10}>
-            We are Supporting Ethical Farmers by "Sidha Kisan Se" (Directly from Farmer's) movement. So, when you buy this authentic product, you directly help the farmers who are ethically growing and nurturing the products & bringing you good health & prosperity. Know more:
-           <a href="https://www.sidhakisanse.com/"  color="text.800">www.sidhakisanse.com</a>
+        <VStack my={5}>
+          <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} >
+            We are Supporting Ethical Farmers by "Sidha Kisan Se" (Directly from Farmer's) movement. So, when you buy this authentic product, you directly help the farmers who are ethically growing and nurturing the products & bringing you good health & prosperity. <b>Know more:</b>{"  "}
+           <a href="https://www.sidhakisanse.com/" style={{color:"#6E9E5F"}} >www.sidhakisanse.com</a>
           </Box>
 
           <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} mt={2}>
@@ -64,7 +45,7 @@ const Aboutus = () => {
         
 
           <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} mt={2}>
-          <Text fontSize={22} fontWeight={500}> Inspired by:</Text> Bansi Gir Gaushala, which has been practicing Vedic Gaupalan for the last 14 years. Bansi Gir aims to contribute to the revival of "GauSanskriti," an ancient culture that placed the Gaumata (cow as a divine mother) at the center of healthcare, agriculture, education, economy & social activity. Know more: <Link to="https://www.bansigir.in/"  textDecoration={"none"} color="text.800" >www.bansigir.in </Link> 
+          <Text fontSize={22} fontWeight={500}> Inspired by:</Text> Bansi Gir Gaushala, which has been practicing Vedic Gaupalan for the last 14 years. Bansi Gir aims to contribute to the revival of "GauSanskriti," an ancient culture that placed the Gaumata (cow as a divine mother) at the center of healthcare, agriculture, education, economy & social activity. <b>Know more:</b>{" "} <Link to="https://www.bansigir.in/"  textDecoration={"none"} color="text.500" >www.bansigir.in </Link> 
           </Box>
         </VStack>
 
