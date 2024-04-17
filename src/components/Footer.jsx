@@ -55,8 +55,7 @@ export default function Footer() {
             fontSize={{ base: "sm", lg: "md" }}
             className="scrolling-text"
           >
-            For Deliveries in America, Canada, Europe, UAE, Singapore, etc Email
-            us on
+            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia email us at{" "}
             <Link
               target="_blank"
               href="mailto:export@suryanorganic.com"
@@ -65,7 +64,7 @@ export default function Footer() {
             >
               export@suryanorganic.com
             </Link>{" "}
-            or Whatsapp on{" "}
+            or WhatsApp us at{" "}
             <Link
               target="_blank"
               href="https://wa.me/+916354800089?text=Hello%2C%20this%20is%20a%20test%20message"
@@ -277,7 +276,7 @@ export default function Footer() {
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
               <Stack >
                 <ListHeader marginBottom={5}>
-                  We Accepts Payments via
+                We accept payments via
                 </ListHeader>
               </Stack>
               <Image
