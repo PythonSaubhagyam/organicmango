@@ -219,7 +219,77 @@ export default function Home() {
       <Container maxW={"container.xl"} px={0} mt={4}>
         <Image src="./Mango/Home/rating_review.png" alt="" />
       </Container>
+       
+      <Container maxW={"container.xl"}>
+        <Heading
+          color="brand.500"
+          size="lg"
+          mx="auto"
+          align={"center"}
+          mt={5}
+         
+        >
+          BLOGS
+        </Heading>
 
+        <Grid
+          templateColumns={{
+            base: "repeat(1,1fr)",
+            md: "repeat(2,1fr)",
+            lg: "repeat(4,1fr)",
+          }}
+          px={2}
+          py={3}
+          spacing="40px"
+        >
+          {blogs?.slice(0, 8).map((blog) => (
+            <GridItem key={blog.id} m={4}>
+              <Card>
+                <LinkBox h={400}>
+                  <Image
+                    src={blog.banner}
+                    w="100%"
+                    h="300px"
+                    loading="lazy"
+                    objectFit={"cover"}
+                    borderRadius={5}
+                    style={{
+                      opacity: 1,
+                      transition: "opacity 0.7s", // Note the corrected syntax here
+                    }}
+                  />
+                  <LinkOverlay
+                    _hover={{ color: "text.500" }}
+                    href={`/blogs/${blog.id}/`}
+                  >
+                    <Heading size="sm" fontWeight={500} m={2}>
+                      {blog.title}
+                    </Heading>
+                  </LinkOverlay>
+                </LinkBox>
+                <Flex m={2} justifyContent={"space-between"}>
+                  <Text fontSize={"sm"} color="gray.500">
+                    {new Intl.DateTimeFormat("en-CA", {
+                      dateStyle: "long",
+                      timeZone: "Asia/Kolkata",
+                    }).format(new Date(blog.published_at))}
+                  </Text>
+                  <Text
+                    fontSize={"sm"}
+                    fontWeight={600}
+                    color={"brand.500"}
+                    onClick={() => navigate(`/blogs/${blog.id}/`)}
+                    cursor={"pointer"}
+                  >
+                    Read more
+                    <ChevronRightIcon />
+                  </Text>
+                </Flex>
+              </Card>
+            </GridItem>
+          ))}
+        </Grid>
+      </Container>
       <Container maxW={"container.xl"} backgroundColor={"bg.500"} py={2}>
         <SimpleGrid
           columns={[2, 3, null, 4]}
