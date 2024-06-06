@@ -15,6 +15,7 @@ import checkLogin from "../utils/checkLogin";
 
 import { HiInformationCircle } from "react-icons/hi";
 import BreadCrumbCom from "../components/BreadCrumbCom";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function ConsultOurVaidya() {
     const toast = useToast();
@@ -227,6 +228,7 @@ export default function ConsultOurVaidya() {
                     </Box>
                 </Flex>
             </Container>
+            <ScrollToTop/>
             <Footer />
         </>
     );
