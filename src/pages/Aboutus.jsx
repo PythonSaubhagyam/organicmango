@@ -14,7 +14,7 @@ const Aboutus = () => {
       <Container maxW={"container.xl"} alignContent={"flex-start"}>
         <BreadCrumbCom second={"About Us"} secondUrl={"/about-us"} />{" "}
       </Container>
-      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+      <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="./Mango/About us/tree.jpg"  filter="brightness(50%)" width="100%"/>
 
         <Text
