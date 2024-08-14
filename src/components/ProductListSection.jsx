@@ -129,10 +129,10 @@ export default function ProductListSection({ title, products, loading, type }) {
           </Slider>
         ) : (
           <Grid
-            templateColumns={{
-              base: "repeat(1, 1fr)",
-              md: "repeat(1, 1fr)",
-            }}
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            md: "repeat(4, 1fr)",
+          }}
             //justify={ "start"}
             justify="center"
             align="center"
@@ -140,6 +140,7 @@ export default function ProductListSection({ title, products, loading, type }) {
             // wrap={"wrap"}
             wrap={{ md: "wrap", lg: "nowrap" }}
             px={5}
+            gap={6}
           
           >
             {loading === true ? (
