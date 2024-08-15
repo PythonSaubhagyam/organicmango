@@ -29,6 +29,8 @@ import {
   Card,
   Skeleton,
   Button,
+  CardBody,
+  CardFooter
 } from "@chakra-ui/react";
 import client from "../setup/axiosClient";
 import CheckOrSetUDID from "../utils/checkOrSetUDID";
@@ -170,12 +172,80 @@ export default function Home() {
       <Container centerContent mt={12}>
         <Image src={"./Mango/Home/Mango Webstie.jpg"} w={"50%"} alt="" />
       </Container>
-      <Container maxW={"6xl"} centerContent>
-        <ProductListSection
+      <Container maxW={"6xl"} centerContent my={3}>
+        {new_arrival_gir_gauveda?.map((product)=>(
+      <Card
+      w={{ base: "80vw", sm: "3xs", lg: "2xs" }}
+      border="1px"
+      mx={2}
+      mb={5}
+      borderColor="brand.100"
+      borderRadius={"lg"}
+      onClick={() => {
+        window.location.href = `/products/${product.id}`;
+        // navigate(),
+        //   window.scrollTo({
+        //     top: 0,
+        //     left: 0,
+        //     behavior: "smooth",
+        //   });
+      }}
+      cursor={"pointer"}
+    >
+      <CardBody backgroundColor={"white"} borderRadius="lg">
+        <Image
+          src={product.home_image ? product.home_image : product.image1}
+          alt={product.name}
+          borderRadius="lg"
+          boxSize="150px"
+          objectFit={"contain"}
+          mx="auto"
+        />
+      </CardBody>
+      <CardFooter
+        align={"center"}
+        py={3}
+        flexDirection="column"
+        backgroundColor={"bg.500"}
+        borderBottomRadius="lg"
+      >
+        <Box
+          h="80px"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Heading
+            size="sm"
+            mb={3}
+            noOfLines={3}
+            fontWeight="500"
+            title={product.name}
+          >
+            {product.name}
+          </Heading>
+        </Box>
+        <Button
+          as={Link}
+          to={ product.id  && `/products/${product.id}`}
+          fontSize="sm"
+          w={{ base: "100%", lg: "80%" }}
+          mx="auto"
+          backgroundColor={"brand.500"}
+          borderColor={"brand.100"}
+          color="white"
+          _hover={{ backgroundColor: "brand.900" }}
+        >
+          View Product
+        </Button>
+      </CardFooter>
+    </Card>
+    ))}
+        {/* <ProductListSection
           // title="New Arrival Gir Gauveda"
           loading={loading}
           products={new_arrival_gir_gauveda}
-        />
+        /> */}
       </Container>
       <Container maxW={"container.xl"} px={{ md: 20, base: 8 }} centerContent>
         <Grid
