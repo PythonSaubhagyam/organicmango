@@ -28,7 +28,7 @@ export default function ReturnRefundPolicy() {
           secondUrl={"/return-and-refund-policy"}
         />
       </Container>
-      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+      <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/refund.jpg" />
 
         <Text
@@ -47,7 +47,7 @@ export default function ReturnRefundPolicy() {
            Refund & Return Policy
         </Text>
       </Container>
-      <Container maxW={"6xl"} py={10}>
+      <Container maxW={"6xl"} py={5}>
         <Heading textAlign={"center"} color="#436131" pb={8}>
           Return and Refund Policy
         </Heading>
