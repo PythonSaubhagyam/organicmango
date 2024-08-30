@@ -299,6 +299,7 @@ export default function ProductDetails() {
                   direction={"column"}
                   gap={2}
                   align={{ base: "flex-start", md: "flex-start" }}
+
                   //mt={{md:16}}
                 >
                   <Heading
@@ -350,6 +351,7 @@ export default function ProductDetails() {
                           color={"black"}
                           fontWeight={"500"}
                         >
+                          Brand :{"  "}
                           {productData.brand_name}
                         </Text>
                       )}
@@ -463,8 +465,9 @@ export default function ProductDetails() {
                       marginLeft={5}
                       fontSize={{
                         base: "16px",
-                        lg: "20px",
+                        lg: "16px",
                       }}
+                      // height={130}
                       // lineHeight={1.5}
                       fontWeight={"400"}
                       textAlign="justify"
@@ -498,13 +501,7 @@ export default function ProductDetails() {
                     </Text>
                   </Skeleton>
 
-                  <SimpleGrid
-                    spacing={{ base: 8, md: 8 }}
-                    zIndex={0}
-                    //pb={3}
-                    pt={3}
-                   // mt={5}
-                  >
+                  <SimpleGrid spacing={{ base: 8, md: 7 }} zIndex={0} pt={5}>
                     {totalQuantity?.Quantity !== 0 && (
                       <ButtonGroup
                         as={Flex}
@@ -530,6 +527,7 @@ export default function ProductDetails() {
                     <ButtonGroup
                       as={"Flex"}
                       gap={{ base: 3 }}
+                      alignItems={"flex-start"}
                       flexDirection={{ base: "column", md: "row" }}
                     >
                       {totalQuantity?.Quantity === 0 ? (
@@ -550,6 +548,7 @@ export default function ProductDetails() {
                           id="addToCartButton"
                           as={Flex}
                           //textAlign={"center"}
+
                           gap={2}
                           colorScheme="brand"
                           size="sm"
@@ -559,19 +558,21 @@ export default function ProductDetails() {
                             bg: "brand.500",
                             cursor: "pointer",
                           }}
-                          me={3}
+                          //pt={2}
+                          //me={3}
                           onClick={() => AddToCart(productData?.id, counter)}
                         >
                           <FaShoppingCart />
-                          ADD TO CART
+                          <Text>ADD TO CART</Text>
                         </Button>
                       )}
 
                       <Button
                         colorScheme={isWished ? "red" : "brand"}
                         as={Flex}
-                        gap={1}
+                        gap={3}
                         size="sm"
+                        style={{ marginLeft: 0 }}
                         _hover={
                           isWished
                             ? {
@@ -588,7 +589,11 @@ export default function ProductDetails() {
                         onClick={() => handleWishlistChange(productData?.id)}
                       >
                         <AiFillHeart />
-                        {isWished ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}
+                        <Text >
+                          {isWished
+                            ? "REMOVE FROM WISHLIST"
+                            : "ADD TO WISHLIST"}
+                        </Text>
                       </Button>
                     </ButtonGroup>
                   </SimpleGrid>
@@ -604,7 +609,7 @@ export default function ProductDetails() {
                   mt={1}
                   dangerouslySetInnerHTML={{
                     // __html: dompurify.sanitize(productData?.description),
-                    __html: productData?.description,
+                    __html: productData.description,
                   }}
                 />
               </Skeleton>
