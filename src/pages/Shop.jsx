@@ -50,7 +50,7 @@ export default function Shop() {
   const [productFoamsArray, setProductFoamsArray] = useState();
   const [brandArray, setBrandArray] = useState();
   const [productFoam, setProductFoam] = useState(null);
-  const [brandWise, setBrandWise] = useState(null);
+  //const [brandWise, setBrandWise] = useState(null);
   const [banners, setBanners] = useState({
     bannerWeb: null,
     bannerMobile: null,
@@ -68,6 +68,8 @@ export default function Shop() {
   const prod_search = searchPar.get("search");
   const page = searchPar.get("page") ? searchPar.get("page") : 1;
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const brand =searchPar.get("brand")
+  const brand_name =searchPar.get("brand_name")
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
     limits: {
@@ -92,7 +94,7 @@ export default function Shop() {
     getFilter();
     CheckOrSetUDID();
     getProducts(); // eslint-disable-next-line
-  }, [page, categoryId, sortKey, prod_search, brandWise, tagWise, productFoam]);
+  }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
 
   useEffect(() => {
     getCategories();
@@ -111,8 +113,8 @@ export default function Shop() {
       if (sortKey !== null) {
         params["ordering"] = sortKey.value;
       }
-      if (brandWise !== null) {
-        params.brand = brandWise.value;
+      if (brand !== null) {
+        params.brand = brand.value;
       }
       if (tagWise !== null) {
         params.product_tag = tagWise.value;
@@ -246,7 +248,10 @@ export default function Shop() {
         category: categoryId,
         category_name: category_name,
       });
-    } else {
+    }  if(searchPar.get("brand")){
+      params.brand = brand;
+        params.brand_name = brand_name;
+    }else {
       setSearchParams({
         page: nextPage,
       });
@@ -282,7 +287,7 @@ export default function Shop() {
           align="center"
           mb={6}
         >
-          {category_name ?? `All Products`}
+          {brand_name ? brand_name : category_name ? category_name :`All Products`}
         </Heading>
 
         <Flex
