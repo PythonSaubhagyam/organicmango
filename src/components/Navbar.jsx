@@ -258,7 +258,9 @@ export default function Navbar() {
   const [Open1, setOpen1] = useState(false);
 
   const handleHover1 = () => {
+    if (megaCategories.length > 0) {
     setOpen(true);
+    }
   };
 
   const handleClose1 = () => {

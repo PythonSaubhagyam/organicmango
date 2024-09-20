@@ -52,18 +52,18 @@ export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     CheckOrSetUDID();
-    getHomePageData();
+    //getHomePageData();
     getBlogs();
   }, []);
 
-  async function getHomePageData() {
-    const response = await client.get("/home");
-    if (response.data.status === true) {
-      setBanners(response.data.banners);
-      setHome(response.data);
-    }
-    setLoading(false);
-  }
+  // async function getHomePageData() {
+  //   const response = await client.get("/home");
+  //   if (response.data.status === true) {
+  //     setBanners(response.data.banners);
+  //     setHome(response.data);
+  //   }
+  //   setLoading(false);
+  // }
   async function getBlogs() {
     const params = {};
     const response = await client.get("/home/blogs/", {
