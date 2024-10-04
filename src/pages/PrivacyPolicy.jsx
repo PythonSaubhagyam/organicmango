@@ -315,7 +315,7 @@ const PrivacyPolicy = () => {
       <Container maxW={"container.xl"} mb={5} px={20} centerContent>
         <Image
           src={
-            require("../../public/001.jpg")
+            "/001.jpg"
           }
           w={"container.xl"}
           alt=""
