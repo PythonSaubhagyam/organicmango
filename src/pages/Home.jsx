@@ -46,6 +46,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
   const [homeData, setHome] = useState({});
+  const [sections, setSections] = useState([]);
   // let [isFull] = useMediaQuery("(max-width:1920px)");
   const [blogs, setBlogs] = useState([]);
   const isMobiles = width <= 768;
@@ -58,6 +59,7 @@ export default function Home() {
     init();
     //getHomePageData();
     getBlogs();
+    getImage();
   }, []);
 
   // async function getHomePageData() {
@@ -78,6 +80,15 @@ export default function Home() {
     }
   }
 
+  async function getImage() {
+    const params = {};
+    const response = await client.get("/lower-section", {
+      params: params,
+    });
+    if (response.data.status === true) {
+      setSections(response.data.data);
+    }
+  }
   const new_arrival_gir_gauveda = [
     {
       image1: "./Mango/Home/alphonso Mango.jpg",
@@ -425,7 +436,7 @@ export default function Home() {
             align={"center"}
             my={3}
           >
-            OUR CERTIFICATIONS & AWARDS
+             {sections?.length >0 && sections[0].label}
           </Heading>
         </Box>
         <Text
@@ -445,9 +456,7 @@ export default function Home() {
           pb={6}
         >
           <LazyLoadImage
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/global-certificate.jpg"
-            }
+             src={sections?.length > 0 && sections[0]?.images[0].image}
             alt="global-certificate"
             style={{
               opacity: 1,
@@ -455,9 +464,7 @@ export default function Home() {
             }}
           />
           <LazyLoadImage
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/ciolook-certificate.jpg"
-            }
+              src={sections?.length > 0 && sections[0]?.images[1].image}
             alt="ciolook-certificate"
             style={{
               opacity: 1,
