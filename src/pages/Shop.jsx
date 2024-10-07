@@ -98,9 +98,9 @@ export default function Shop() {
     getProducts(); // eslint-disable-next-line
   }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
 
   async function getProducts(nextPage) {
     const checkOrSetUDIDInfo = await CheckOrSetUDID();
@@ -242,10 +242,10 @@ export default function Shop() {
       console.error("Error fetching data:", error);
     }
   }
-  useEffect(() => {
-    const filtered = categories.filter((item) => item.id === categoryId);
-    setFilteredData(filtered);
-  }, [data, categoryId]);
+  // useEffect(() => {
+  //   const filtered = categories.filter((item) => item.id === categoryId);
+  //   setFilteredData(filtered);
+  // }, [data, categoryId]);
 
   async function handlePageChange(nextPage) {
     setCurrentPage(nextPage);

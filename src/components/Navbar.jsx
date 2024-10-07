@@ -275,7 +275,7 @@ export default function Navbar() {
 
   useEffect(() => {
     //CheckOrSetUDID();
-    getMegaCategories();
+    //getMegaCategories();
   }, []);
 
   const getMegaCategories = async () => {
@@ -352,6 +352,7 @@ export default function Navbar() {
 
     if (response.data.status === true) {
       setCategories(response.data.categories);
+      setMegaCategories(response.data.categories);
       setTopCategory(mergeArraysById(mainLinks, response.data.categories));
     }
   };
