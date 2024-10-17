@@ -47,6 +47,7 @@ export default function Home() {
   const [isMobile] = useMediaQuery("(max-width: 480px)");
   const [homeData, setHome] = useState({});
   const [sections, setSections] = useState([]);
+  const [awardsSection, setAwardSection] = useState();
   // let [isFull] = useMediaQuery("(max-width:1920px)");
   const [blogs, setBlogs] = useState([]);
   const isMobiles = width <= 768;
@@ -56,10 +57,10 @@ export default function Home() {
       await CheckOrSetUDID();
        };
   
-    init();
+    //init();
     //getHomePageData();
     getBlogs();
-    getImage();
+    getLowerSection();
   }, []);
 
   // async function getHomePageData() {
@@ -80,13 +81,22 @@ export default function Home() {
     }
   }
 
-  async function getImage() {
+  async function getLowerSection() {
     const params = {};
-    const response = await client.get("/lower-section", {
+    const response = await client.get("/lower-section/", {
       params: params,
     });
     if (response.data.status === true) {
       setSections(response.data.data);
+     
+    
+      const ourAwardsSection = response.data.data?.filter(
+        (section) => section.id === 1
+      );
+     
+      setAwardSection(ourAwardsSection);
+     
+     
     }
   }
   const new_arrival_gir_gauveda = [
@@ -422,56 +432,58 @@ export default function Home() {
           </Stat>
         </SimpleGrid>
       </Container>
-      <Container maxW={{ base: "100vw", md: "container.xl" }}>
-        <Box
-          w="100%"
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="brand.500"
-            fontSize={{ md: 33, base: 21 }}
-            mx="auto"
-            align={"center"}
-            my={3}
-          >
-             {sections?.length >0 && sections[0].label}
-          </Heading>
-        </Box>
-        <Text
-          mb={5}
-          textAlign={{ md: "center", base: "justify" }}
-          color="text.300"
-        >
-          We are committed to quality and each of our facilities is
-          independently certified by an industry-accredited agency.
-        </Text>
-        <Flex
-          justifyContent="space-evenly"
-          direction={{ base: "column", md: "row" }}
-          align="center"
-          gap={12}
-          pt={1}
-          pb={6}
-        >
-          <LazyLoadImage
-             src={sections?.length > 0 && sections[0]?.images[0].image}
-            alt="global-certificate"
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s", // Note the corrected syntax here
-            }}
-          />
-          <LazyLoadImage
-              src={sections?.length > 0 && sections[0]?.images[1].image}
-            alt="ciolook-certificate"
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s", // Note the corrected syntax here
-            }}
-          />
-        </Flex>
+      {awardsSection?.length > 0 &&
+        awardsSection[0]?.is_visible_on_website === true && (
+          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+           
+              <Heading
+                color="brand.500"
+                fontSize={{ md: 33, base: 20 }}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {awardsSection?.length > 0 && awardsSection[0]?.label}
+              </Heading>
+           
+            <Text my={5} textAlign={"center"} color="text.300">
+              We are committed to quality and each of our facilities is
+              independently certified by an industry-accredited agency.
+            </Text>
+            <Flex
+              justifyContent="space-evenly"
+              direction={{ base: "column", md: "row" }}
+              align="center"
+              gap={12}
+              pt={1}
+              pb={6}
+            >
+              <LazyLoadImage
+                src={
+                  awardsSection[0]?.images?.length > 0 &&
+                  awardsSection[0]?.images[0]?.image
+                }
+                alt="global-certificate"
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s", // Note the corrected syntax here
+                }}
+              />
+              <LazyLoadImage
+                src={
+                  awardsSection[0]?.images?.length > 0 &&
+                  awardsSection[0]?.images[1]?.image
+                }
+                alt="ciolook-certificate"
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s", // Note the corrected syntax here
+                }}
+              />
+            </Flex>
+          </Container>
+        )}
         <Container centerContent>
         <Heading
             color="brand.500"
@@ -498,7 +510,7 @@ export default function Home() {
         <Container maxW={"3xl"} centerContent>
           <Image src="./Mango/Home/mango_key_point.jpg" />
         </Container>
-      </Container>
+     
       <ScrollToTop/>
       <Footer />
       {/* </>
