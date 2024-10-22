@@ -64,6 +64,7 @@ import { TfiYoutube } from "react-icons/tfi";
 import { FaApple, FaFacebookF, FaGooglePlay, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
+import LoginModal from "./LoginModal";
 
 const Links = [
   {
@@ -205,6 +206,7 @@ export default function Navbar() {
   const [Open, setOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const menuRef = useRef(null);
   const [topCategory, setTopCategory] = useState([]);
   const handleScroll = (direction) => {
@@ -615,8 +617,7 @@ export default function Navbar() {
                     _hover={{ bg: "brand.500" }}
                   > */}
                     <MenuItem
-                      as={Link}
-                      href="/login"
+                      onClick={()=>setIsLoginModalOpen(true)}
                       cursor={"pointer"}
                       _hover={{ textDecoration: "none" }}
                     >
@@ -1090,7 +1091,7 @@ export default function Navbar() {
                       }}
                       fontWeight={500}
                       fontSize={{ md: "14px" }}
-                      onClick={() => navigate("/login")}
+                      onClick={() => setIsLoginModalOpen(true)}
                     >
                       Login
                     </Link>
@@ -1331,6 +1332,12 @@ export default function Navbar() {
           </Grid>
         </Container>
       </Container>
+      {!checkLogin().isLoggedIn && (
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
+      )}
     </>
   );
 }
