@@ -255,6 +255,9 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
+      
+    }
+    if(category_name){
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {

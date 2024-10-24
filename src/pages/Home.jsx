@@ -389,6 +389,7 @@ export default function Home() {
               maxW={"container.xl"}
               px={0}
               mt={{ base: 4, md: 8, lg: 12 }}
+              centerContent
             >
               <Image
                 src={
@@ -396,15 +397,17 @@ export default function Home() {
                   anotherImage[0]?.images[1]?.image
                 }
                 alt=""
+                width={"100%"}
               />
             </Container>
-            <Container maxW={"container.xl"} px={0} mt={4}>
+            <Container centerContent maxW={"container.xl"} px={0} mt={4}>
               <Image
                 src={
                   anotherImage[0]?.images?.length > 0 &&
                   anotherImage[0]?.images[2]?.image
                 }
                 alt=""
+                width={"100%"}
               />
             </Container>{" "}
           </>
