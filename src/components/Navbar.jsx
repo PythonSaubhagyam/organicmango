@@ -68,7 +68,7 @@ import LoginModal from "./LoginModal";
 
 const Links = [
   {
-    name: "SOSE Elite",
+    name: "Elite Membership",
     location: "/subscription-plans",
   },
   {
