@@ -261,7 +261,7 @@ export default function Navbar() {
 
   const handleHover1 = () => {
     if (megaCategories.length > 0) {
-    setOpen(true);
+      setOpen(true);
     }
   };
 
@@ -333,10 +333,10 @@ export default function Navbar() {
   useEffect(() => {
     const init = async () => {
       await CheckOrSetUDID();
-       };
-  
+    };
+
     init();
-   // CheckOrSetUDID();
+    // CheckOrSetUDID();
     getCategories();
   }, []);
 
@@ -430,7 +430,23 @@ export default function Navbar() {
     };
   }, []);
   const Logout = () => {
-    localStorage.clear();
+    // localStorage.clear();
+    const userKeys = [
+      "token",
+      "first_name",
+      "last_name",
+      "email",
+      "phone_no",
+      "wishlist_counter",
+      "allow_company_list",
+      "is_sose_elite_user",
+      "id",
+      "access",
+    ];
+
+    userKeys.forEach((key) => localStorage.removeItem(key));
+    CartEmitter.emit("updateCartCount", 0);
+    CartEmitter.emit("updateProductTotal", 0);
     toast({
       title: "Logged out successfully!",
       status: "success",
@@ -617,7 +633,7 @@ export default function Navbar() {
                     _hover={{ bg: "brand.500" }}
                   > */}
                     <MenuItem
-                      onClick={()=>setIsLoginModalOpen(true)}
+                      onClick={() => setIsLoginModalOpen(true)}
                       cursor={"pointer"}
                       _hover={{ textDecoration: "none" }}
                     >
@@ -660,15 +676,15 @@ export default function Navbar() {
                         style={
                           all
                             ? {
-                                background: "#436131",
-                                color: "white",
-                                borderRadius: 5,
-                              }
+                              background: "#436131",
+                              color: "white",
+                              borderRadius: 5,
+                            }
                             : {
-                                background: "white",
-                                color: "black",
-                                borderRadius: 5,
-                              }
+                              background: "white",
+                              color: "black",
+                              borderRadius: 5,
+                            }
                         }
                       >
                         <Box
@@ -910,7 +926,7 @@ export default function Navbar() {
             <GridItem
               rowSpan={2}
               colSpan={1}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
               <Link as={ReactRouterLink} to="/">
                 <Image
@@ -927,7 +943,7 @@ export default function Navbar() {
               marginLeft={12}
               display={"flex"}
               alignItems={"center"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
               <InputGroup size="sm" width={"80%"}>
                 <Input
@@ -1114,7 +1130,7 @@ export default function Navbar() {
             <GridItem
               colSpan={9}
               display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
               <Flex
                 as={"nav"}
@@ -1273,15 +1289,15 @@ export default function Navbar() {
                 <FiInstagram fontSize={20} />
               </Link>
               <Link
-              _hover={{ color: "text.500" }}
-              isExternal={true}
-              as={ReactRouterLink}
-              to={
-                "https://api.whatsapp.com/send/?phone=7405095969&text&type=phone_number&app_absent=0"
-              }
-            >
-              <FaWhatsapp fontSize={20} />
-            </Link>
+                _hover={{ color: "text.500" }}
+                isExternal={true}
+                as={ReactRouterLink}
+                to={
+                  "https://api.whatsapp.com/send/?phone=7405095969&text&type=phone_number&app_absent=0"
+                }
+              >
+                <FaWhatsapp fontSize={20} />
+              </Link>
               {/* <Link
               _hover={{ color: "text.500" }}
               isExternal={true}

@@ -7,6 +7,8 @@ import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
+import MetaHome from "../components/MetaHome";
+
 import {
   Container,
   Flex,
@@ -196,9 +198,12 @@ export default function Home() {
     //   name: "Kesar Mango",
     // },
   ];
+  const pageUrl = "/";
 
   return (
     <>
+      <MetaHome pageUrl={pageUrl} />
+
       {/* {loading === true ? (
         <Center h="100vh" w="100vw" backgroundColor={"bg.500"}>
           <Loader site={true} />
@@ -581,10 +586,10 @@ export default function Home() {
             />
           </Container>
         )}
-     {weAreAtSection?.length > 0 && weAreAtSection[0]?.is_visible_on_website === true && <Container mt={3}>
+      {weAreAtSection?.length > 0 && weAreAtSection[0]?.is_visible_on_website === true && <Container mt={3}>
         <Image src={weAreAtSection[0]?.image} w="100%" alt="" />
       </Container>}
-      {ethicalSection?.length > 0 && ethicalSection[0]?.is_visible_on_website === true &&<Container maxW={"3xl"} centerContent>
+      {ethicalSection?.length > 0 && ethicalSection[0]?.is_visible_on_website === true && <Container maxW={"3xl"} centerContent>
         <Image src={ethicalSection[0]?.image} />
       </Container>}
       {!checkLogin().isLoggedIn && (

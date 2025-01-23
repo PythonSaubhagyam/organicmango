@@ -4,18 +4,23 @@ import Navbar from "../components/Navbar";
 import { Box, Container, VStack, Image, Text, Link } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 const Aboutus = () => {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const pageUrl = "/about-us";
+
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       {IsMobileView !== "true" && <Navbar />}
       <Container maxW={"container.xl"} alignContent={"flex-start"}>
         <BreadCrumbCom second={"About Us"} secondUrl={"/about-us"} />{" "}
       </Container>
       <Container maxW={"container.xl"} py={1} px={0} position="relative">
-        <Image src="./Mango/About us/tree.jpg"  filter="brightness(50%)" width="100%"/>
+        <Image src="./Mango/About us/tree.jpg" filter="brightness(50%)" width="100%" />
 
         <Text
           pb={2}
@@ -28,7 +33,7 @@ const Aboutus = () => {
           left="50%"
           transform="translate(-50%, -50%)"
           zIndex="1"
-          // Optional: Add background to improve text readability
+        // Optional: Add background to improve text readability
         >
           About Us
         </Text>
@@ -38,15 +43,15 @@ const Aboutus = () => {
         <VStack my={5}>
           <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} >
             We are Supporting Ethical Farmers by "Sidha Kisan Se" (Directly from Farmer's) movement. So, when you buy this authentic product, you directly help the farmers who are ethically growing and nurturing the products & bringing you good health & prosperity. <b>Know more:</b>{"  "}
-           <a href="https://www.sidhakisanse.com/" style={{color:"#6E9E5F"}} >www.sidhakisanse.com</a>
+            <a href="https://www.sidhakisanse.com/" style={{ color: "#6E9E5F" }} >www.sidhakisanse.com</a>
           </Box>
 
           <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} mt={2}>
-          Sourcing handpicked organic mangoes like Ratnagiri and Kesar mangoes from Maharashtra and Junagadh, we wish to provide you with the best flavored nutritious mangoes from certified organic farms. Our mangoes are grown under environment-friendly practices and are not plucked until they reach full maturity.       </Box>
-        
+            Sourcing handpicked organic mangoes like Ratnagiri and Kesar mangoes from Maharashtra and Junagadh, we wish to provide you with the best flavored nutritious mangoes from certified organic farms. Our mangoes are grown under environment-friendly practices and are not plucked until they reach full maturity.       </Box>
+
 
           <Box maxW={"6xl"} textAlign={"justify"} fontSize={18} mt={2}>
-          <Text fontSize={22} fontWeight={500}> Inspired by:</Text> Bansi Gir Gaushala, which has been practicing Vedic Gaupalan for the last 14 years. Bansi Gir aims to contribute to the revival of "GauSanskriti," an ancient culture that placed the Gaumata (cow as a divine mother) at the center of healthcare, agriculture, education, economy & social activity. <b>Know more:</b>{" "} <Link to="https://www.bansigir.in/"  textDecoration={"none"} color="text.500" >www.bansigir.in </Link> 
+            <Text fontSize={22} fontWeight={500}> Inspired by:</Text> Bansi Gir Gaushala, which has been practicing Vedic Gaupalan for the last 14 years. Bansi Gir aims to contribute to the revival of "GauSanskriti," an ancient culture that placed the Gaumata (cow as a divine mother) at the center of healthcare, agriculture, education, economy & social activity. <b>Know more:</b>{" "} <Link to="https://www.bansigir.in/" textDecoration={"none"} color="text.500" >www.bansigir.in </Link>
           </Box>
         </VStack>
 
@@ -140,7 +145,7 @@ const Aboutus = () => {
             continue to grow as we seek solutions to modern day problems by
             looking back to our ancient Bharatiya "Gau Sanskriti".{" "}
           </Box> */}
-      <ScrollToTop/>
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
     </>
   );

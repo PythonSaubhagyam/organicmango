@@ -17,6 +17,7 @@ import LoginModal from "../components/LoginModal";
 import { HiInformationCircle } from "react-icons/hi";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function ConsultOurVaidya() {
   const toast = useToast();
@@ -38,9 +39,12 @@ export default function ConsultOurVaidya() {
       setIsLoginModalOpen(true)
     }
   }
+  const pageUrl = "/consult-our-vaidya";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       <Navbar />
       <Container maxW="container.xl">
         <BreadCrumbCom

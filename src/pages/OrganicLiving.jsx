@@ -13,21 +13,22 @@ import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function OrganicLiving() {
     const banners = [
         {
-        
+
             image: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/banner 1.jpg",
             alt_text: "Banner 1",
         },
         {
-        
+
             image: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/banner 2.jpg",
             alt_text: "Banner 2",
         },
         {
-         
+
             image: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/banner 3.jpg",
             alt_text: "Banner 3",
         },
@@ -36,7 +37,7 @@ export default function OrganicLiving() {
             alt_text: "Banner 4",
         },
         {
-           
+
             image: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/banner 5.jpg",
             alt_text: "Banner 5",
         },
@@ -44,9 +45,12 @@ export default function OrganicLiving() {
 
     const width = useBreakpointValue({ base: "100%", lg: "1200" });
     const height = useBreakpointValue({ base: "300", lg: "600" });
+    const pageUrl = "/organic-living";
 
     return (
         <>
+            <MetaTags pageUrl={pageUrl} />
+
             <Navbar />
 
             <Container maxW={"container.xl"} alignContent={"flex-start"}>
@@ -438,7 +442,7 @@ export default function OrganicLiving() {
                     </Text>
                 </Container>
             </Container>
-            <ScrollToTop/>
+            <ScrollToTop />
             <Footer />
         </>
     );
