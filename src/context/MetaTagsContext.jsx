@@ -61,8 +61,9 @@ const MetaTags = ({ pageUrl }) => {
       <title>Natural Mango</title>
       <meta
         name="description"
-        content="Ancient natural ingredients for holistic health and wellness.
-         Harness the power of fresh, effective products for vitality."
+        content="Sourcing handpicked organic mangoes like Ratnagiri and Kesar mangoes 
+        from Maharashtra and Junagadh, we wish to provide you with
+         the best flavored nutritious mangoes from certified organic farms."
       />
       <meta name="keywords" content="naturalmango,contact us,SOSE Elite" />
     </Helmet>
