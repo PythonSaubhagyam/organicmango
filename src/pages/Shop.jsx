@@ -100,10 +100,12 @@ export default function Shop() {
 
 
   const dispatch = useDispatch();
-  const { tagsArray, productFoamsArray, brandArray } = useSelector((state) => state.shop);
+  const { tagsArray, productFoamsArray, brandArray, hasFetched } = useSelector((state) => state.shop);
   useEffect(() => {
-    dispatch(fetchFilters());
-  }, [dispatch])
+    if (!hasFetched) {
+      dispatch(fetchFilters());
+    }
+  }, [dispatch,hasFetched])
 
   async function getProducts(nextPage) {
     setLoading(true);

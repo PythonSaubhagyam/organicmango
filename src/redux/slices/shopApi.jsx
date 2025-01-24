@@ -38,6 +38,7 @@ const shopSlice = createSlice({
     productFoamsArray: [],
     brandArray: [],
     loading: false,
+    hasFetched: false,
     error: null,
   },
   reducers: {},
@@ -51,6 +52,7 @@ const shopSlice = createSlice({
         state.tagsArray = action.payload.tags;
         state.productFoamsArray = action.payload.foams;
         state.brandArray = action.payload.brands;
+        state.hasFetched = true;
       })
       .addCase(fetchFilters.rejected, (state, action) => {
         state.loading = false;
