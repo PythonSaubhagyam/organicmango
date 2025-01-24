@@ -12,14 +12,18 @@ import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function ShippingPolicy() {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const pageUrl = "/shipping-policy";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       {IsMobileView !== "true" && <Navbar />}
 
       <Container maxW="container.xl">
@@ -42,7 +46,7 @@ export default function ShippingPolicy() {
           left="50%"
           transform="translate(-50%, -50%)"
           zIndex="1"
-          // Optional: Add background to improve text readability
+        // Optional: Add background to improve text readability
         >
           Shipping Policy
         </Text>
@@ -102,7 +106,7 @@ export default function ShippingPolicy() {
           </ListItem>
         </UnorderedList>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
     </>
   );

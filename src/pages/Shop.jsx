@@ -37,6 +37,7 @@ import { Select } from "chakra-react-select";
 import CapitalizeLetter from "../utils/CommanFunction";
 import { fetchFilters } from "../redux/slices/shopApi";
 import { useDispatch, useSelector } from "react-redux";
+import MetaTags from "../context/MetaTagsContext";
 
 // import Paginator from "../components/Paginator";
 
@@ -109,9 +110,9 @@ export default function Shop() {
     try {
       let params = categoryId
         ? {
-            page: nextPage ? nextPage : page,
-            category_id: categoryId,
-          }
+          page: nextPage ? nextPage : page,
+          category_id: categoryId,
+        }
         : { page: nextPage ? nextPage : page };
 
       if (sortKey !== null) {
@@ -227,7 +228,7 @@ export default function Shop() {
     });
   }
 
-  const handleSoryKeyChange = (e) =>{
+  const handleSoryKeyChange = (e) => {
     setSortKey(e);
     setCurrentPage(1);
     const params = {
@@ -236,9 +237,9 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
+
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -254,7 +255,7 @@ export default function Shop() {
 
   }
 
-  const handleTagWiseChange=(e)=>{
+  const handleTagWiseChange = (e) => {
     setTagWise(e)
     setCurrentPage(1);
     const params = {
@@ -263,9 +264,9 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
+
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -282,7 +283,7 @@ export default function Shop() {
 
   }
 
-  const handleProductFoamChange =(e)=>{
+  const handleProductFoamChange = (e) => {
     setProductFoam(e)
     setCurrentPage(1);
     const params = {
@@ -291,9 +292,9 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
+
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -319,8 +320,12 @@ export default function Shop() {
       // getProducts();
     }
   };
+  const pageUrl = "/shop";
+
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       <Navbar />
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Shop"} secondUrl={"/shop"} />
@@ -337,8 +342,8 @@ export default function Shop() {
           {brand_name
             ? brand_name
             : category_name
-            ? category_name
-            : `All Products`}
+              ? category_name
+              : `All Products`}
         </Heading>
 
         <Flex
@@ -392,7 +397,7 @@ export default function Shop() {
                   variant={"outline"}
                   onChange={(e) => {
                     handleSoryKeyChange(e);
-                    
+
                   }}
                   placeholder="Select Option"
                   options={[

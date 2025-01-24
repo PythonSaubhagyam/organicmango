@@ -7,6 +7,8 @@ import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
+import MetaHome from "../components/MetaHome";
+
 import {
   Container,
   Flex,
@@ -110,9 +112,11 @@ export default function Home() {
   }, []);
 
 
-
+  const pageUrl = "/";
   return (
     <>
+      <MetaHome pageUrl={pageUrl} />
+
       {/* {loading === true ? (
         <Center h="100vh" w="100vw" backgroundColor={"bg.500"}>
           <Loader site={true} />

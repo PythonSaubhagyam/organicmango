@@ -17,13 +17,17 @@ import {
     useBreakpointValue,
 } from "@chakra-ui/react";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function Testimonials() {
     const width = useBreakpointValue({ base: "100%", lg: "890" });
     const height = useBreakpointValue({ base: "300", lg: "500" });
+    const pageUrl = "/testimonials";
 
     return (
         <>
+            <MetaTags pageUrl={pageUrl} />
+
             <Navbar />
             <Container maxW="container.xl">
                 <BreadCrumbCom
@@ -844,7 +848,7 @@ export default function Testimonials() {
                     </AccordionItem>
                 </Accordion>
             </Container>
-            <ScrollToTop/>
+            <ScrollToTop />
             <Footer />
         </>
     );

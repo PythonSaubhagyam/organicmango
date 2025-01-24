@@ -28,6 +28,7 @@ import moment from "moment";
 import "moment-timezone";
 import formatTime from "../utils/formatTime";
 import { AsyncSelect } from "chakra-react-select";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function BookAppointment() {
   const initialFormData = Object.freeze({
@@ -146,9 +147,12 @@ export default function BookAppointment() {
     setCountries(Options);
     return Options;
   };
+  const pageUrl = "/consult-our-vaidya/schedule-appointment";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       <Navbar />
       <form onSubmit={(e) => handleSubmit(e)}>
         <Container
