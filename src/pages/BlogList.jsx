@@ -19,7 +19,9 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { FaFacebookSquare, FaInstagram, FaYoutube } from "react-icons/fa";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  useNavigate, useSearchParams, Link as ReactRouterLink,
+} from "react-router-dom";
 import dompurify from "dompurify";
 import client from "../setup/axiosClient";
 import {
@@ -57,12 +59,12 @@ export default function BlogList() {
     const params =
       searchParams.get("archive") !== null
         ? {
-            page: 1,
-            publish_filter: searchParams.get("archive"),
-          }
+          page: 1,
+          publish_filter: searchParams.get("archive"),
+        }
         : {
-            page: searchParams.get("page") ?? 1,
-          };
+          page: searchParams.get("page") ?? 1,
+        };
     const response = await client.get("/blogs/", {
       params: params,
     });
@@ -117,7 +119,7 @@ export default function BlogList() {
 
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Blog"} secondUrl={"/blogs"} />
-       
+
       </Container>
       <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/news and event.jpg" />
@@ -133,7 +135,7 @@ export default function BlogList() {
           left="50%"
           transform="translate(-50%, -50%)"
           zIndex="1"
-          // Optional: Add background to improve text readability
+        // Optional: Add background to improve text readability
         >
           News & Articles
         </Text>
@@ -155,7 +157,7 @@ export default function BlogList() {
               {blogs.map((blog) => (
                 <Box key={blog.id}>
                   <LinkBox my={4}>
-                    <LinkOverlay href={`/blogs/${blog.id}/`}>
+                    <LinkOverlay as={ReactRouterLink} to={`/blogs/${blog.id}/`}>
                       <Heading size="lg" fontWeight={"600"} color="brand.500">
                         {blog.title}
                       </Heading>
@@ -357,7 +359,7 @@ export default function BlogList() {
         </Flex>
       </Container>
 
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

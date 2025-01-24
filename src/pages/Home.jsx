@@ -34,168 +34,82 @@ import {
 } from "@chakra-ui/react";
 import client from "../setup/axiosClient";
 import CheckOrSetUDID from "../utils/checkOrSetUDID";
-import { useNavigate, NavLink as RouterLink } from "react-router-dom";
+import {
+  useNavigate, NavLink as RouterLink, Link as ReactRouterLink,
+} from "react-router-dom";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
 import LoginModal from "../components/LoginModal";
 import checkLogin from "../utils/checkLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { initializeAppData } from "../redux/slices/homeApi";
 
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
   const height = useBreakpointValue({ base: "300", lg: "400" });
-  const [banners, setBanners] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
-  const [homeData, setHome] = useState({});
-  const [aboutSection, setAboutSection] = useState();
-  const [varietySection, setVarietySection] = useState();
-  const [naturalMangoSection, setNaturalMangoSection] = useState();
-  const [anotherImage, setAnotherImage] = useState();
-  const [awardsSection, setAwardSection] = useState();
-  const [licensesSection, setLicensesSection] = useState();
-  const [weAreAtSection, setWeAreAtSection] = useState();
-  const [ethicalSection, setEthicalSection] = useState();
-  const [statisticsSection, setStatisticsSection] = useState([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(
     sessionStorage.getItem("hasShownPopup")
   );
   const loginInfo = checkLogin();
-  // let [isFull] = useMediaQuery("(max-width:1920px)");
-  const [blogs, setBlogs] = useState([]);
   const isMobiles = width <= 768;
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const {
+    banners,
+    upperSection,
+    newArrival,
+    mustTry,
+    bestSeller,
+    lowerSection1,
+    blogs,
+    statisticsSection,
+    lowerSection2,
+    loading,
+    hasFetched,
+  } = useSelector((state) => state.home);
+
+  const {
+    naturalMangoSection,
+    varietySection,
+    aboutSection,
+    anotherImage,
+  } = upperSection;
+
+  const {
+    licensesSection,
+    weAreAtSection,
+    ethicalSection,
+  } = lowerSection1;
+
+  const {
+    awardsSection,
+    servicesSection,
+    availableSection,
+  } = lowerSection2;
+
+  useEffect(() => {
+    if (!hasFetched) {
+      dispatch(initializeAppData());
+    }
+  }, [dispatch, hasFetched]);
+
+
   useEffect(() => {
     const init = async () => {
       await CheckOrSetUDID();
     };
-
     init();
-    getBanners();
-    getBlogs();
-
-    getStatisticsSection();
-    getLowerSection();
-    getUpperSection();
     if (showPopup === null && !loginInfo.isLoggedIn) {
       setIsLoginModalOpen(true);
     }
   }, []);
 
-  async function getBanners() {
-    setLoading(true);
-    try {
-      const response = await client.get("/ecommerce/banners/?sequence=Upper");
 
-      if (response.data.status === true) {
-        setBanners(response?.data?.banner);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("Error fetching data:", error);
-    }
-  }
-  async function getBlogs() {
-    const params = {};
-    const response = await client.get("/home/blogs/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setBlogs(response.data.blogs);
-    }
-  }
-
-  async function getUpperSection() {
-    const promise1 = await client.get("/naturalmango-section/?type=Upper");
-
-    const promise2 = await client.get("/naturalmango-section/?type=Lower");
-
-    Promise.all([promise1, promise2])
-      .then(function (responses) {
-        if (responses[0].data.status === true) {
-          const naturalMango = responses[0].data.data?.filter(
-            (section) => section.id === 1
-          );
-          const variety = responses[0].data.data?.filter(
-            (section) => section.id === 2
-          );
-          const about = responses[0].data.data?.filter(
-            (section) => section.id === 3
-          );
-          const anotherImages = responses[0].data.data?.filter(
-            (section) => section.id === 4
-          );
-
-          setAboutSection(about);
-          setNaturalMangoSection(naturalMango);
-          setVarietySection(variety);
-          setAnotherImage(anotherImages);
-        }
-
-        if (responses[1].data.status === true) {
-          const licenses = responses[1].data.data?.filter(
-            (section) => section.id === 5
-          );
-          const weAreAt = responses[1].data.data?.filter(
-            (section) => section.id === 6
-          );
-          const ethical = responses[1].data.data?.filter(
-            (section) => section.id === 7
-          );
-
-          setLicensesSection(licenses);
-          setWeAreAtSection(weAreAt);
-          setEthicalSection(ethical);
-        }
-
-        setLoading(false);
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.error("Error fetching data:", error);
-      });
-  }
-
-  async function getStatisticsSection() {
-    const params = {};
-    const response = await client.get("/statistics-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setStatisticsSection(response?.data?.data);
-    }
-  }
-  async function getLowerSection() {
-    const params = {};
-    const response = await client.get("/lower-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      const ourAwardsSection = response.data.data?.filter(
-        (section) => section.id === 1
-      );
-
-      setAwardSection(ourAwardsSection);
-    }
-  }
-
-  const new_arrival_gir_gauveda = [
-    {
-      image1: "./Mango/Home/alphonso Mango.jpg",
-      src: "alphonso",
-      name: "Alphonso Mango",
-      id: 1275,
-    },
-    // {
-    //   image1: "./Mango/Home/kesar mango.jpg",
-    //   src: "kesar",
-    //   name: "Kesar Mango",
-    // },
-  ];
 
   return (
     <>
@@ -206,15 +120,18 @@ export default function Home() {
       ) : (
         <> */}
       <Navbar />
-      <Container maxW={"container.xl"} px={0}>
-        {loading === true ? (
-          <Skeleton h={489}></Skeleton>
-        ) : (
-          <Carousel banners={banners?.length > 0 && banners} />
-        )}
-      </Container>
+      {banners.length > 0 &&
+        < Container maxW={"container.xl"} px={0}>
+          {loading === true ? (
+            <Skeleton h={489}></Skeleton>
+          ) : (
+            <Carousel banners={banners?.length > 0 && banners} />
+          )}
+        </Container >
+      }
 
-      {naturalMangoSection?.length > 0 &&
+      {
+        naturalMangoSection?.length > 0 &&
         naturalMangoSection[0]?.is_visible_on_website === true && (
           <>
             {" "}
@@ -251,8 +168,10 @@ export default function Home() {
               </Button>
             </Container>{" "}
           </>
-        )}
-      {varietySection?.length > 0 &&
+        )
+      }
+      {
+        varietySection?.length > 0 &&
         varietySection[0]?.is_visible_on_website === true && (
           <>
             {" "}
@@ -269,15 +188,8 @@ export default function Home() {
                     mb={5}
                     borderColor="brand.100"
                     borderRadius={"lg"}
-                    onClick={() => {
-                      window.location.href = `/products/${product.product}`;
-                      // navigate(),
-                      //   window.scrollTo({
-                      //     top: 0,
-                      //     left: 0,
-                      //     behavior: "smooth",
-                      //   });
-                    }}
+                    as={ReactRouterLink}
+                    to={`/products/${product.product}`}
                     cursor={"pointer"}
                   >
                     <CardBody backgroundColor={"white"} borderRadius="lg">
@@ -336,8 +248,10 @@ export default function Home() {
         /> */}
             </Container>{" "}
           </>
-        )}
-      {aboutSection?.length > 0 &&
+        )
+      }
+      {
+        aboutSection?.length > 0 &&
         aboutSection[0]?.is_visible_on_website === true && (
           <Container
             maxW={"container.xl"}
@@ -369,9 +283,11 @@ export default function Home() {
               </GridItem>
             </Grid>
           </Container>
-        )}
+        )
+      }
 
-      {anotherImage?.length > 0 &&
+      {
+        anotherImage?.length > 0 &&
         anotherImage[0]?.is_visible_on_website === true && (
           <>
             {" "}
@@ -411,7 +327,8 @@ export default function Home() {
               />
             </Container>{" "}
           </>
-        )}
+        )
+      }
 
       <Container maxW={"container.xl"}>
         <Heading color="brand.500" size="lg" mx="auto" align={"center"} mt={5}>
@@ -446,7 +363,7 @@ export default function Home() {
                   />
                   <LinkOverlay
                     _hover={{ color: "text.500" }}
-                    href={`/blogs/${blog.id}/`}
+                    as={ReactRouterLink} to={`/blogs/${blog.id}/`}
                   >
                     <Heading size="sm" fontWeight={500} m={2}>
                       {blog.title}
@@ -477,31 +394,34 @@ export default function Home() {
         </Grid>
       </Container>
 
-      {statisticsSection?.length > 0 && (
-        <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
-          <SimpleGrid
-            columns={[2, 3, null, 4]}
-            px={6}
-            maxW={"container.xl"}
-            my={6}
-            color={"text.700"}
-            align="center"
-            spacingX={{ base: "10vw", md: "30px" }}
-            spacingY="40px"
-          >
-            {statisticsSection?.length > 0 &&
-              statisticsSection?.map((data) => (
-                <Stat>
-                  <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
-                    {data?.value}
-                  </StatNumber>
-                  <StatHelpText color="gray.600">{data?.name}</StatHelpText>
-                </Stat>
-              ))}
-          </SimpleGrid>
-        </Container>
-      )}
-      {awardsSection?.length > 0 &&
+      {
+        statisticsSection?.length > 0 && (
+          <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
+            <SimpleGrid
+              columns={[2, 3, null, 4]}
+              px={6}
+              maxW={"container.xl"}
+              my={6}
+              color={"text.700"}
+              align="center"
+              spacingX={{ base: "10vw", md: "30px" }}
+              spacingY="40px"
+            >
+              {statisticsSection?.length > 0 &&
+                statisticsSection?.map((data) => (
+                  <Stat>
+                    <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
+                      {data?.value}
+                    </StatNumber>
+                    <StatHelpText color="gray.600">{data?.name}</StatHelpText>
+                  </Stat>
+                ))}
+            </SimpleGrid>
+          </Container>
+        )
+      }
+      {
+        awardsSection?.length > 0 &&
         awardsSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
             <Box
@@ -560,8 +480,10 @@ export default function Home() {
               />
             </Flex>
           </Container>
-        )}
-      {licensesSection?.length > 0 &&
+        )
+      }
+      {
+        licensesSection?.length > 0 &&
         licensesSection[0]?.is_visible_on_website === true && (
           <Container centerContent>
             <Heading
@@ -580,19 +502,26 @@ export default function Home() {
               w={"25%"}
             />
           </Container>
-        )}
-     {weAreAtSection?.length > 0 && weAreAtSection[0]?.is_visible_on_website === true && <Container mt={3}>
-        <Image src={weAreAtSection[0]?.image} w="100%" alt="" />
-      </Container>}
-      {ethicalSection?.length > 0 && ethicalSection[0]?.is_visible_on_website === true &&<Container maxW={"3xl"} centerContent>
-        <Image src={ethicalSection[0]?.image} />
-      </Container>}
-      {!checkLogin().isLoggedIn && (
-        <LoginModal
-          isOpen={isLoginModalOpen}
-          onClose={() => setIsLoginModalOpen(false)}
-        />
-      )}
+        )
+      }
+      {
+        weAreAtSection?.length > 0 && weAreAtSection[0]?.is_visible_on_website === true && <Container mt={3}>
+          <Image src={weAreAtSection[0]?.image} w="100%" alt="" />
+        </Container>
+      }
+      {
+        ethicalSection?.length > 0 && ethicalSection[0]?.is_visible_on_website === true && <Container maxW={"3xl"} centerContent>
+          <Image src={ethicalSection[0]?.image} />
+        </Container>
+      }
+      {
+        !checkLogin().isLoggedIn && (
+          <LoginModal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+          />
+        )
+      }
       <ScrollToTop />
       <Footer />
       {/* </>

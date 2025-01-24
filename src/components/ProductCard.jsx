@@ -7,7 +7,9 @@ import {
   Image,
   Box,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link, useNavigate, Link as ReactRouterLink,
+} from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -19,15 +21,8 @@ export default function ProductCard({ product }) {
       mb={5}
       borderColor="brand.100"
       borderRadius={"lg"}
-      onClick={() => {
-        window.location.href = `/products/${product.id}`;
-        // navigate(),
-        //   window.scrollTo({
-        //     top: 0,
-        //     left: 0,
-        //     behavior: "smooth",
-        //   });
-      }}
+      as={ReactRouterLink}
+      to={product.id && `/products/${product.id}`}
       cursor={"pointer"}
     >
       <CardBody backgroundColor={"white"} borderRadius="lg">
@@ -64,8 +59,8 @@ export default function ProductCard({ product }) {
           </Heading>
         </Box>
         <Button
-          as={Link}
-          to={ product.id  && `/products/${product.id}`}
+          as={ReactRouterLink}
+          to={product.id && `/products/${product.id}`}
           fontSize="sm"
           w={{ base: "100%", lg: "80%" }}
           mx="auto"

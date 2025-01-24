@@ -6,18 +6,22 @@ import moment from "moment";
 import { theme } from "./theme/theme";
 import { useEffect } from "react";
 import client from "./setup/axiosClient";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 export default function App() {
   moment.tz.setDefault("Asia/Kolkata");
 
- /* useEffect(() => {
-    // eslint-disable-next-line
-    const response = client.post("/visit-counter/");
-  }, []);*/
+  /* useEffect(() => {
+     // eslint-disable-next-line
+     const response = client.post("/visit-counter/");
+   }, []);*/
 
   return (
-    <ChakraProvider theme={theme}>
-      <RouterProvider router={Router}></RouterProvider>
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <RouterProvider router={Router}></RouterProvider>
+      </ChakraProvider>
+    </Provider>
   );
 }
