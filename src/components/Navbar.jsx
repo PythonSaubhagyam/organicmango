@@ -66,7 +66,7 @@ import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
 import LoginModal from "./LoginModal";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchCategories} from "../redux/slices/categoryApi";
+import { fetchCategories } from "../redux/slices/categoryApi";
 
 const Links = [
   {
@@ -187,7 +187,7 @@ export default function Navbar() {
 
   const handleHover1 = () => {
     if (categories.length > 0) {
-    setOpen(true);
+      setOpen(true);
     }
   };
 
@@ -238,7 +238,7 @@ export default function Navbar() {
   useEffect(() => {
     const init = async () => {
       await CheckOrSetUDID();
-       };
+    };
     init();
   }, []);
 
@@ -256,9 +256,9 @@ export default function Navbar() {
   }, [searchQuery]);
 
   const dispatch = useDispatch();
-  const { categories, mergedCategories, hasFetched } = useSelector((state)=>state.category);
+  const { categories, mergedCategories, hasFetched } = useSelector((state) => state.category);
   useEffect(() => {
-    if(!hasFetched){
+    if (!hasFetched) {
       dispatch(fetchCategories());
     }
   }, [dispatch])
@@ -447,6 +447,8 @@ export default function Navbar() {
                             align="center"
                             bg="bg.100"
                             gap={4}
+                            onClick={() => setSearchResults(null)}
+
                           >
                             <Image src={result.image1} boxSize="10" />
                             <Text
@@ -457,7 +459,7 @@ export default function Navbar() {
                                 lg: "75%",
                               }}
                             >
-                              <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
+                              <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}/${result.name.replace(/\s+/g, "-")}`}>
                                 {result.name}
                               </LinkOverlay>
                             </Text>
@@ -909,6 +911,8 @@ export default function Navbar() {
                           borderRadius: 6,
                           cursor: "pointer",
                         }}
+                        onClick={() => setSearchResults(null)}
+
                       >
                         {/* <Image src={result.image1} boxSize="10" /> */}
                         <Text
@@ -919,7 +923,7 @@ export default function Navbar() {
                             lg: "75%",
                           }}
                         >
-                          <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
+                          <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}/${result.name.replace(/\s+/g, "-")}`}>
                             {result.name}
                           </LinkOverlay>
                         </Text>
@@ -1062,9 +1066,9 @@ export default function Navbar() {
                   </MenuButton>
                   <MenuList
                     as={Grid}
-                    width={700}
+                    // width={700}
                     //height={400}
-                    templateColumns="repeat(9, 1fr)"
+                    templateColumns="repeat(3, 1fr)"
                     onMouseLeave={handleClose1}
                     zIndex={9999}
                   >
@@ -1100,41 +1104,57 @@ export default function Navbar() {
                         </>
                       ))}
                     </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {megaSubCategories?.map((item, subIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={subIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}&category_name=${encodeURIComponent(item?.name)}`)}
-                          onMouseEnter={() => handleShow2(item.children)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {nestedCategories?.map((item, nestedIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={nestedIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}&category_name=${encodeURIComponent(item?.name)}`)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
+                    {megaSubCategories?.length > 0 && (
+                      <GridItem colSpan={3} overflowY="auto">
+                        {megaSubCategories.map((item) => (
+                          <MenuItem
+                            fontSize="14px"
+                            key={item.id} // Use item.id instead of index
+                            onClick={() =>
+                              item?.id &&
+                              navigate(
+                                `/shop?category=${item.id}&category_name=${encodeURIComponent(item.name)}`
+                              )
+                            }
+                            onMouseEnter={() => handleShow2(item.children)}
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "brand.500",
+                                color: "white",
+                              },
+                            }}
+                          >
+                            {item?.name}
+                          </MenuItem>
+                        ))}
+                      </GridItem>
+                    )}
+
+                    {nestedCategories?.length > 0 && (
+                      <GridItem colSpan={3} overflowY="auto">
+                        {nestedCategories.map((item) => (
+                          <MenuItem
+                            fontSize="14px"
+                            key={item.id} // Use item.id instead of index
+                            onClick={() =>
+                              item?.id &&
+                              navigate(
+                                `/shop?category=${item.id}&category_name=${encodeURIComponent(item.name)}`
+                              )
+                            }
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "brand.500",
+                                color: "white",
+                              },
+                            }}
+                          >
+                            {item?.name}
+                          </MenuItem>
+                        ))}
+                      </GridItem>
+                    )}
+
                   </MenuList>
                 </Menu>
                 {Links.map((link) => (

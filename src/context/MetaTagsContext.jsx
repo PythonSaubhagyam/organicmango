@@ -65,7 +65,6 @@ const MetaTags = ({ pageUrl }) => {
         from Maharashtra and Junagadh, we wish to provide you with
          the best flavored nutritious mangoes from certified organic farms."
       />
-      <meta name="keywords" content="naturalmango,contact us,SOSE Elite" />
     </Helmet>
   );
 };

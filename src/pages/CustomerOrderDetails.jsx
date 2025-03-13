@@ -48,6 +48,11 @@ export default function CustomerOrderDetails() {
   });
   const { orderId } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isPayment, setPayment] = useState(false);
+  const [Txt_new_id, setTxt_new_id] = useState("");
+  const [CartCount, setCartCount] = useState(
+    localStorage.getItem("cart_counter") ?? 0
+  );
   const toast = useToast();
   useEffect(() => {
     getOrderDetails(); // eslint-disable-next-line
@@ -130,6 +135,61 @@ export default function CustomerOrderDetails() {
       });
   };
 
+  async function handleOnlinePayment() {
+    setPayment(true); // Set the payment loading state
+
+    const data = {
+      order_id: orderDetails.order_id,
+      txnid: new Date().getTime().toString(), // Generate a unique transaction ID
+      amount: orderDetails.final_total?.toString() || "0", // Use the total amount from the order details
+      productinfo: orderDetails.is_gift ? "Gift" : "SOSE", // Check if it's a gift
+      billing_address: orderDetails.billing_address?.id, // Billing address
+      shipping_amount: orderDetails.shipping_amt, // Shipping amount
+      tax_amount: orderDetails.tax_amt, // Tax amount
+      is_a_gift: orderDetails.is_gift, // If it's a gift
+      giftMessage: orderDetails.gift_message || "", // Gift message (if any)
+      voucherCode: orderDetails.applied_voucher_code || "", // Voucher code (if any)
+    };
+
+    // Send request to backend for payment link
+    try {
+
+      const res = await client.patch(
+        `edit-order-payment-link/`,
+        data,
+        {
+          // params: {order_id : orderDetails.order_id},
+          headers: {
+            Authorization: `token ${checkLogin().token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (res.data.status === true) {
+        setTxt_new_id(res.data.txn_id);
+        localStorage.setItem("cart_counter", 0);
+        setCartCount(0);
+        const options = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
+        window.open(res.data.payment_url, "_top", options);
+        setTimeout(() => {
+          window.open(res.data.payment_url, "_top", options);
+        });
+      }
+    } catch (error) {
+      console.error("Payment Error:", error);
+      toast({
+        title: "Payment failed! Please try again.",
+        status: "error",
+        position: "top-right",
+        duration: 4000,
+        isClosable: true,
+      });
+    } finally {
+      setPayment(false);
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -152,29 +212,31 @@ export default function CustomerOrderDetails() {
         >
           <Heading fontWeight={500}>{orderDetails?.order_id}</Heading>
           <Flex gap={2} align="center">
-            {orderDetails?.is_paid === false && (
-              <Button size="sm" colorScheme={"brand"}>
-                <Icon as={BsCheck} boxSize={6} />
-                Accept and Pay
-              </Button>
-            )}
+            {
+              orderDetails.order_status !== "Cancelled" &&
+              orderDetails?.is_paid === false &&
+              orderDetails.order_status !== "Delivered" &&
+              (
+                <Button size="sm" colorScheme={"brand"} isLoading={isPayment}
+                  loadingText="Processing..." onClick={handleOnlinePayment}  >
+                  <Icon as={BsCheck} boxSize={6} />
+                  Accept and Pay
+                </Button>
+              )}
             {orderDetails.order_status !== "Pending" &&
               orderDetails.is_invoiced && (
                 <>
-                  <IconButton
-                    icon={<BsPrinter fontSize={"1.25rem"} />}
-                    size="md"
-                    bg={"transparent"}
-                    color={"brand"}
-                    onClick={() => printFun()}
-                  />
-                  <IconButton
-                    icon={<BsDownload fontSize={"1.25rem"} />}
-                    size="md"
-                    bg={"transparent"}
-                    color={"brand"}
-                    onClick={() => downloadPdf()}
-                  />
+                  <Button
+                    size="sm"
+                    colorScheme={"brand"}
+                    isLoading={isPayment}
+                    loadingText="Processing..."
+                    onClick={downloadPdf}
+                    rightIcon={<BsDownload fontSize="1.1rem" />}
+                  >
+                    Invoice
+                  </Button>
+
                 </>
               )}
           </Flex>
@@ -206,7 +268,7 @@ export default function CustomerOrderDetails() {
             gap={{ base: 6, md: 20 }}
           >
             {JSON.stringify(orderDetails.billing_address) ===
-            JSON.stringify(orderDetails.shipping_address) ? (
+              JSON.stringify(orderDetails.shipping_address) ? (
               <Box fontSize="sm">
                 <Heading size="sm">Invoicing and Shipping Address</Heading>
                 <Box w="100%" mt={2}>
@@ -215,7 +277,7 @@ export default function CustomerOrderDetails() {
                   </Text>
                   <Text>
                     {orderDetails ??
-                    orderDetails?.billing_address?.mobile_no === "None"
+                      orderDetails?.billing_address?.mobile_no === "None"
                       ? null
                       : "Phone : " + orderDetails?.billing_address?.mobile_no}
                   </Text>
@@ -249,7 +311,7 @@ export default function CustomerOrderDetails() {
                     </Text>
                     <Text>
                       {orderDetails ??
-                      orderDetails?.billing_address?.mobile_no === "None"
+                        orderDetails?.billing_address?.mobile_no === "None"
                         ? null
                         : "Phone : " + orderDetails?.billing_address?.mobile_no}
                     </Text>
@@ -281,10 +343,10 @@ export default function CustomerOrderDetails() {
                     </Text>
                     <Text>
                       {orderDetails ??
-                      orderDetails?.shipping_address?.mobile_no === "None"
+                        orderDetails?.shipping_address?.mobile_no === "None"
                         ? null
                         : "Phone : " +
-                          orderDetails?.shipping_address?.mobile_no}
+                        orderDetails?.shipping_address?.mobile_no}
                     </Text>
                     <Text mt={1} w="20vw">
                       {orderDetails?.shipping_address?.full_address}
@@ -334,7 +396,7 @@ export default function CustomerOrderDetails() {
                   orderDetails.rated_product_info?.map((item) => (
                     <Tr key={item.id}>
                       <Td>
-                        <Link href={`/products/${item.id}`} fontWeight="bold">
+                        <Link href={`/products/${item.id}/${item.product_name.replace(/\s+/g, "-")}`} fontWeight="bold">
                           {item.product_name}
                         </Link>
                       </Td>
@@ -391,11 +453,11 @@ export default function CustomerOrderDetails() {
                       orderDetails.tax_amt -
                       orderDetails.shipping_amt +
                       orderDetails.discount_amt >
-                    0
+                      0
                       ? orderDetails.final_total -
-                        orderDetails.tax_amt -
-                        orderDetails.shipping_amt +
-                        orderDetails.discount_amt
+                      orderDetails.tax_amt -
+                      orderDetails.shipping_amt +
+                      orderDetails.discount_amt
                       : 0
                     ).toFixed(2)}
                   </Td>

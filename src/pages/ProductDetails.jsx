@@ -735,7 +735,7 @@ export default function ProductDetails() {
                     mx="auto"
                     mt={4}
                     colorScheme="brand"
-                    onClick={() => navigate(`/products/${productId}/reviews`)}
+                    onClick={() => navigate(`/products/${productId}/reviews/${productData?.name.replace(/\s+/g, "-")}`)}
                   >
                     View all reviews
                   </Button>
@@ -743,7 +743,7 @@ export default function ProductDetails() {
               </Flex>
             </Container>
           )}
-          {relatedProducts && relatedProducts?.length > 0(
+          {relatedProducts && relatedProducts?.length > 0 &&(
             <ProductListSection
               title="Related Products"
               products={relatedProducts}
@@ -753,7 +753,7 @@ export default function ProductDetails() {
               type={"carousal"}
             />
           )}
-          {otherProducts && otherProducts?.length > 0(
+          {otherProducts && otherProducts?.length > 0 &&(
             <ProductListSection
               title="Other Products"
               products={otherProducts}
@@ -763,7 +763,7 @@ export default function ProductDetails() {
               type={"carousal"}
             />
           )}
-          {recentlyViewedProducts && recentlyViewedProducts?.length > 0(
+          {recentlyViewedProducts && recentlyViewedProducts?.length > 0 &&(
             <ProductListSection
               title="Recently Viewed Products"
               products={recentlyViewedProducts}

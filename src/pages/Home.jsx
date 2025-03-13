@@ -8,6 +8,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
 import MetaHome from "../components/MetaHome";
+import CountUp from 'react-countup';
+import ScrollTrigger from 'react-scroll-trigger';
 
 import {
   Container,
@@ -59,6 +61,8 @@ export default function Home() {
   const loginInfo = checkLogin();
   const isMobiles = width <= 768;
   const navigate = useNavigate();
+  const [countUp, setCountUp] = useState(false)
+
 
   const dispatch = useDispatch();
   const {
@@ -193,7 +197,7 @@ export default function Home() {
                     borderColor="brand.100"
                     borderRadius={"lg"}
                     as={ReactRouterLink}
-                    to={`/products/${product.product}`}
+                    to={`/products/${product.product}/${product.product_name.replace(/\s+/g, "-")}`}
                     cursor={"pointer"}
                   >
                     <CardBody backgroundColor={"white"} borderRadius="lg">
@@ -231,7 +235,7 @@ export default function Home() {
                       </Box>
                       <Button
                         as={Link}
-                        to={product.id && `/products/${product.product}`}
+                        to={product.id && `/products/${product.product}/${product.product_name.replace(/\s+/g, "-")}`}
                         fontSize="sm"
                         w={{ base: "100%", lg: "80%" }}
                         mx="auto"
@@ -414,8 +418,21 @@ export default function Home() {
               {statisticsSection?.length > 0 &&
                 statisticsSection?.map((data) => (
                   <Stat>
-                    <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
-                      {data?.value}
+                    <StatNumber
+                      color="text.300"
+                      fontSize={{ base: "3xl", md: "3xl" }}
+                    >
+                      <ScrollTrigger onEnter={() => setCountUp(true)}>
+                        {countUp ? (
+                          <CountUp
+                            start={0}
+                            end={Number(data.value.replace(/[^\d]/g, ""))}
+                            duration={1}
+                            delay={0}
+                          />
+                        ) : null}
+                        {data?.name === "Positive Feedback" ? "+%" : data?.name === "Generation of Farmers" ? "th" : "+"}
+                      </ScrollTrigger>
                     </StatNumber>
                     <StatHelpText color="gray.600">{data?.name}</StatHelpText>
                   </Stat>

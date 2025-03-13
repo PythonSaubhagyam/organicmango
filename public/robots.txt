@@ -1,0 +1,51 @@
+User-agent: *
+Disallow:
+
+# Allow all pages to be indexed
+Allow: /
+
+# Block only specific sections
+Disallow: /cgi-bin/
+Disallow:/shop
+Disallow:/cart
+Disallow:/wishlist
+Disallow:/checkout
+Disallow:/store-locator
+Disallow:/inspire-and-support
+Disallow:/gift-voucher
+Disallow:/franchise
+Disallow:/organic-living
+Disallow:/about-us
+Disallow:/blogs
+Disallow:/contact-us
+Disallow:/privacy-policy
+Disallow:/exports
+Disallow:/bussiness
+Disallow:/subscription-plans
+Disallow:/subscription-payment
+Disallow:/consult-our-vaidya
+Disallow:/consult-our-vaidya/schedule-appointment
+Disallow:/appreciation
+Disallow:/resources
+Disallow:/return-and-refund-policy
+Disallow:/shipping-policy
+Disallow:/terms-and-conditions
+Disallow:/testimonials
+Disallow:/faq
+Disallow:/signup
+Disallow:/reset-password
+Disallow:/login
+Disallow:/update-password
+Disallow:/profile
+Disallow:/profile/edit
+Disallow:/profile/addresses/add
+Disallow:/login-system
+
+# Allow Googlebot to crawl everything except restricted pages
+User-agent: Googlebot
+Allow: /
+Disallow: /cgi-bin/
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://www.naturalmango.in/sitemap.xml
