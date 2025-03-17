@@ -53,6 +53,7 @@ import StarRating from "../components/StarRatings";
 import ScrollToTop from "../components/ScrollToTop";
 import LoginModal from "../components/LoginModal";
 import { Helmet } from "react-helmet";
+import RelatedOther from "../components/RelatedOther";
 function ButtonIncrement(props) {
   return (
     <Button
@@ -98,9 +99,6 @@ export default function ProductDetails() {
   const [nobenefits, setNoBenefits] = useState("");
   const [noOfReviews, setNoOfReviews] = useState(null);
   const [reviews, setReviews] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const [otherProducts, setOtherProducts] = useState([]);
-  const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
   const [isWished, setWished] = useState(false);
   const [counter, setCounter] = useState(1);
   const [totalQuantity, setTotalQuantity] = useState({});
@@ -126,56 +124,6 @@ export default function ProductDetails() {
     getProductDetails(); // eslint-disable-next-line
   }, [productId]);
 
-  useEffect(() => {
-    getProductsList(productId); // eslint-disable-next-line
-  }, [productId]);
-
-  async function getProductsList(productId) {
-    const checkOrSetUDIDInfo = await CheckOrSetUDID();
-    let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
-    if (loginInfo.isLoggedIn === true) {
-      headers = {
-        Authorization: `token ${loginInfo.token}`,
-      };
-    }
-    const promise1 = await client.get(
-      `/web/single/product/related/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
-    const promise2 = await client.get(
-      `/web/single/product/other/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
-    const promise3 = await client.get(
-      `/web/single/product/recently-viewed/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
-
-    Promise.all([promise1, promise2, promise3])
-      .then(function (responses) {
-        if (responses[0].data.status === true) {
-          setRelatedProducts(responses[0].data?.data);
-        }
-        if (responses[1].data.status === true) {
-          setOtherProducts(responses[1].data?.data);
-        }
-        if (responses[2].data.status === true) {
-          setRecentlyViewedProducts(responses[2].data?.data);
-        }
-
-        //setLoading(false);
-      })
-      .catch(function (error) {
-        //setLoading(false);
-        console.error("Error fetching data:", error);
-      });
-  }
 
   async function getProductDetails() {
     const checkOrSetUDIDInfo = await CheckOrSetUDID();
@@ -743,36 +691,9 @@ export default function ProductDetails() {
               </Flex>
             </Container>
           )}
-          {relatedProducts && relatedProducts?.length > 0 &&(
-            <ProductListSection
-              title="Related Products"
-              products={relatedProducts}
-              loading={loading}
-              justify="center"
-              fontSize={{ base: "sm", lg: "md" }}
-              type={"carousal"}
-            />
-          )}
-          {otherProducts && otherProducts?.length > 0 &&(
-            <ProductListSection
-              title="Other Products"
-              products={otherProducts}
-              justify="center"
-              loading={loading}
-              fontSize={{ base: "sm", lg: "md" }}
-              type={"carousal"}
-            />
-          )}
-          {recentlyViewedProducts && recentlyViewedProducts?.length > 0 &&(
-            <ProductListSection
-              title="Recently Viewed Products"
-              products={recentlyViewedProducts}
-              justify="center"
-              loading={loading}
-              fontSize={{ base: "sm", lg: "md" }}
-              type={"carousal"}
-            />
-          )}
+
+          <RelatedOther />
+
           <Modal
             size={"xl"}
             closeOnOverlayClick={false}
