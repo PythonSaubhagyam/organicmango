@@ -29,7 +29,7 @@ import "moment-timezone";
 import formatTime from "../utils/formatTime";
 import { AsyncSelect } from "chakra-react-select";
 import MetaTags from "../context/MetaTagsContext";
-
+import Captcha from "../components/Captcha";
 export default function BookAppointment() {
   const initialFormData = Object.freeze({
     event_type: "Appointment",
@@ -56,6 +56,8 @@ export default function BookAppointment() {
   const [availableAppointmentSlots, setAvailableAppointmentSlots] = useState(
     []
   );
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const loginInfo = checkLogin();
 
@@ -568,6 +570,7 @@ export default function BookAppointment() {
                 </SimpleGrid>
               </CheckboxGroup>
             </FormControl>
+            <Captcha onVerify={setIsCaptchaVerified} />
 
             <Button
               type="submit"
@@ -583,6 +586,9 @@ export default function BookAppointment() {
               _active={{
                 bg: "brand.500",
               }}
+              loadingText="Booking..."
+              isLoading={loading}
+              isDisabled={!isCaptchaVerified}
             >
               Book Appointment
               <ArrowForwardIcon ps={1} boxSize={6} />
