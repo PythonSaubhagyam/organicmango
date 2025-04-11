@@ -369,9 +369,11 @@ export default function Navbar() {
             <Image
               // width="100px"
               // height="50px"
+              pb={"5"}
+
               boxSize="130px"
               objectFit="contain"
-              src="/mango_logo.jpg"
+              src="/mango_logo.png"
               alt="SOSE Logo"
             />
           </Link>
@@ -550,9 +552,11 @@ export default function Navbar() {
               <DrawerHeader as={Flex} justify="center">
                 <Link as={ReactRouterLink} to="/">
                   <Image
-                    boxSize="105px"
+                  pb={"5"}
+
+                    boxSize="120px"
                     objectFit="contain"
-                    src="/mango_logo.jpg"
+                    src="/mango_logo.png"
                     alt="SOSE Logo"
                   />
                 </Link>
@@ -822,11 +826,12 @@ export default function Navbar() {
               colSpan={1}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
-              <Link as={ReactRouterLink} to="/">
+              <Link as={ReactRouterLink} to="/" >
                 <Image
-                  boxSize="100px"
+                  pb={"5"}
+                  boxSize="120px"
                   objectFit="contain"
-                  src="/mango_logo.jpg"
+                  src="/mango_logo.png"
                   alt="SOSE Logo"
                 />
               </Link>
