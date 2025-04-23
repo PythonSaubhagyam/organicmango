@@ -466,7 +466,7 @@ export default function Navbar() {
                               </LinkOverlay>
                             </Text>
                             <Text fontSize="sm" fontWeight="600">
-                              ₹{result.base_price}
+                              ₹{Number(result.product_price || result.base_price || 0).toFixed(2)}
                             </Text>
                           </LinkBox>
                         ))}
@@ -552,7 +552,7 @@ export default function Navbar() {
               <DrawerHeader as={Flex} justify="center">
                 <Link as={ReactRouterLink} to="/">
                   <Image
-                  pb={"5"}
+                    pb={"5"}
 
                     boxSize="120px"
                     objectFit="contain"
@@ -933,7 +933,7 @@ export default function Navbar() {
                           </LinkOverlay>
                         </Text>
                         <Text fontSize="sm" fontWeight="600">
-                          ₹{result.base_price}
+                          ₹{Number(result.product_price || result.base_price || 0).toFixed(2)}
                         </Text>
                       </LinkBox>
                     ))}
