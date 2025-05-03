@@ -153,6 +153,7 @@ export default function Home() {
             </Container>
             <Container maxW={"6xl"} mb={8} mt={2} px={0}>
               <Text
+              as={"h1"}
                 color={"text.300"}
                 textAlign={{ md: "center", base: "justify" }}
                 justifyContent={"justify"}
@@ -224,6 +225,7 @@ export default function Home() {
                         justifyContent={"center"}
                       >
                         <Heading
+                        as={"h1"}
                           size="sm"
                           mb={3}
                           noOfLines={3}
@@ -274,7 +276,7 @@ export default function Home() {
               gap={6}
             >
               <GridItem colSpan={1}>
-                <Text color={"text.500"} fontSize={{ md: "3xl", base: "2xl" }}>
+                <Text as={"h1"} color={"text.500"} fontSize={{ md: "3xl", base: "2xl" }}>
                   {aboutSection[0]?.label}
                 </Text>
                 <Text
@@ -339,7 +341,7 @@ export default function Home() {
       }
 
       <Container maxW={"container.xl"}>
-        <Heading color="brand.500" size="lg" mx="auto" align={"center"} mt={5}>
+        <Heading as={"h1"} color="brand.500" size="lg" mx="auto" align={"center"} mt={5}>
           BLOGS
         </Heading>
 
@@ -452,6 +454,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+              as={"h1"}
                 color="brand.500"
                 fontSize={{ md: 33, base: 21 }}
                 mx="auto"
@@ -508,6 +511,7 @@ export default function Home() {
         licensesSection[0]?.is_visible_on_website === true && (
           <Container centerContent>
             <Heading
+            as={"h1"}
               color="brand.500"
               fontSize={{ md: 33, base: 21 }}
               mx="auto"
